@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
 
 *,
 *::before,
@@ -11,8 +12,10 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  // font-family: 'Montserrat', sans-serif;
+  font-family: 'Rubik', sans-serif !important;
   color: #414141;
+  font-weight: 300;
 }
 
 main {
@@ -71,8 +74,16 @@ header {
       }
     }
 
+    &__cart {
+      cursor: pointer;
+    }
+
     &__dropdown {
       margin-left: 1.1rem;
+      cursor: pointer;
+      img {
+        padding-right: 6px;
+      }
     }
 
     @media screen and (max-width: 645px) {
@@ -100,8 +111,8 @@ header {
 
 // --- Footer ---
 footer {
-  display: flex;
-  justify-content: space-between;
+  display: flex !important;
+  justify-content: space-between !important;
   padding: 1.5rem 3vw;
   font-size: 0.9rem;
   border-top: 1px solid #e7e7e7;
@@ -117,5 +128,62 @@ footer {
     align-items: center;
     flex-direction: column;
     gap: 0.4rem;
+  }
+}
+
+// --- Card ---
+.card-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  width: 100%;
+  padding: 0 5rem;
+  margin: 6rem auto 0;
+
+  .card {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 1rem;
+
+    &__image img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    &__title {
+      margin: 0.6rem 0;
+      font-size: 1.1rem;
+    }
+
+    &__addtocart {
+      margin-top: 1rem;
+      text-transform: uppercase;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    @media screen and (min-width: 991px) {
+      flex-basis: 20%;
+      max-width: 20%;
+    }
+    @media screen and (max-width: 990px) {
+      flex-basis: 33.33333%;
+      max-width: 33.33333%;
+    }
+    @media screen and (max-width: 768px) {
+      flex-basis: 50%;
+      max-width: 50%;
+    }
+    @media screen and (max-width: 375px) {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    padding: 0;
   }
 }
