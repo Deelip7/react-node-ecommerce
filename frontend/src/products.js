@@ -1,0 +1,32 @@
+const products = [
+  {
+    _id: '1',
+    name: 'Product 1',
+    image: '/images/product1.jpg',
+    detail: 'Detail about this great product',
+    price: 111.99,
+    numInStock: 4,
+    rating: 5,
+    numReview: 5,
+  },
+  {
+    _id: '1',
+    name: 'Product 1',
+    image: '/images/product1.jpg',
+    detail: 'Detail about this great product',
+    price: 129.99,
+    numInStock: 4,
+    rating: 3.5,
+    numReview: 4,
+  },
+  {
+    _id: '1',
+    name: 'Product 1',
+    image: '/images/product1.jpg',
+    detail: 'Detail about this great product',
+    price: 229.99,
+    numInStock: 4,
+    rating: 4,
+    numReview: 3,
+  },
+];
