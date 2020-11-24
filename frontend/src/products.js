@@ -26,7 +26,7 @@ const products = [
     detail: 'Detail about this great product',
     price: 229.99,
     numInStock: 4,
-    rating: 4,
+    rating: 2.5,
     numReview: 3,
   },
   {
@@ -36,7 +36,7 @@ const products = [
     detail: 'Detail about this great product',
     price: 519.99,
     numInStock: 6,
-    rating: 5,
+    rating: 1.5,
     numReview: 4,
   },
   {
@@ -56,7 +56,7 @@ const products = [
     detail: 'Detail about this great product',
     price: 519.99,
     numInStock: 6,
-    rating: 5,
+    rating: 3.5,
     numReview: 4,
   },
   {
@@ -67,7 +67,7 @@ const products = [
     price: 519.99,
     numInStock: 6,
     rating: 5,
-    numReview: 4,
+    numReview: 2,
   },
 ];
 
