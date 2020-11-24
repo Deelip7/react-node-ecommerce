@@ -9,7 +9,6 @@ const Product = ({ product }) => {
         <Link to={`/product/${product._id}`}>
           <img src={product.image} alt='' />
         </Link>
-        {/* <img src='https://source.unsplash.com/400x400/?keyboard' alt='' /> */}
         <span className='card__addtocart'>Add to Cart</span>
       </div>
       <Link to={`/product/${product._id}`}>

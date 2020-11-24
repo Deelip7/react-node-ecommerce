@@ -1,0 +1,76 @@
+// --- Header ---
+header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2.5vw;
+
+  .nav {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    // border-bottom: 1px solid #e7e7e7;
+
+    &__logo img {
+      margin-right: 2rem;
+      height: 3.5rem;
+    }
+
+    &__search {
+      display: flex;
+      margin-right: auto;
+      gap: 0.5rem;
+      background-color: #e7e7e74a;
+      padding: 0.4rem;
+      width: 25rem;
+
+      button {
+        background-color: initial;
+        border: none;
+        cursor: pointer;
+        margin-left: 0.4rem;
+      }
+
+      input {
+        width: 100%;
+        background-color: initial;
+        border: none;
+        &:placeholder-shown {
+          color: #a4a4a4;
+        }
+      }
+    }
+
+    &__cart {
+      cursor: pointer;
+      img {
+        width: 2.19rem;
+      }
+    }
+
+    &__dropdown {
+      margin-left: 1.1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      img {
+        padding: 0 6px 2px 0;
+      }
+    }
+
+    @media screen and (max-width: 645px) {
+      &__search {
+        width: calc(100% - 2vw);
+        order: 3;
+      }
+
+      &__logo {
+        margin-right: auto;
+      }
+
+      &__dropdown {
+        margin-right: 1rem;
+      }
+    }
+  }
+}

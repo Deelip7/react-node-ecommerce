@@ -1,0 +1,21 @@
+// --- Footer ---
+footer {
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 1.5rem 3vw;
+  font-size: 1rem;
+  border-top: 1px solid #e7e7e7;
+
+  li {
+    display: inline;
+    margin-left: 1rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    align-items: center;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+}

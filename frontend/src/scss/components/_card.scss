@@ -1,0 +1,63 @@
+// --- Card ---
+.card-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+  width: 100%;
+  padding: 0 5rem;
+  margin: 4.5rem auto 0;
+
+  .card {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 1rem;
+    position: relative;
+
+    &__image img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    &__title {
+      font-weight: normal;
+      font-size: 1.1rem;
+    }
+    &__rating {
+      margin: 0.4rem 0;
+      font-size: 0.9rem;
+    }
+
+    &__addtocart {
+      position: relative;
+      top: -40px;
+      left: 10px;
+      background-color: rgb(255, 255, 255);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      cursor: pointer;
+      padding: 3% 7%;
+    }
+
+    @media screen and (min-width: 991px) {
+      flex-basis: 20%;
+      max-width: 20%;
+    }
+    @media screen and (max-width: 990px) {
+      flex-basis: 33.33333%;
+      max-width: 33.33333%;
+    }
+    @media screen and (max-width: 768px) {
+      flex-basis: 50%;
+      max-width: 50%;
+    }
+    @media screen and (max-width: 375px) {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    padding: 0;
+  }
+}
