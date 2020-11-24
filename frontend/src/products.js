@@ -6,7 +6,7 @@ const products = [
     detail: 'Detail about this great product',
     price: 111.99,
     numInStock: 4,
-    rating: 5,
+    rating: 0.5,
     numReview: 5,
   },
   {
