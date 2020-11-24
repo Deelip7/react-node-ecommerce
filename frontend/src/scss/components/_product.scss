@@ -7,7 +7,8 @@
   .product {
     display: flex;
     justify-content: center;
-    gap: 10rem;
+    padding: 0 2rem;
+    gap: 5rem;
 
     &__price {
       font-size: 1.5rem;
@@ -17,21 +18,30 @@
     &__detail {
       margin: 1rem 0;
       font-size: 1.1rem;
-      max-width: 25vw;
+      max-width: 30vw;
       color: #555555;
+    }
+
+    @media screen and (max-width: 990px) {
+      gap: 2rem;
+
+      &__detail {
+        max-width: 50vw;
+      }
     }
 
     @media screen and (max-width: 768px) {
       flex-direction: column;
-      gap: 5rem;
+      gap: 4rem;
       padding: 0 1rem;
 
       &__info {
         order: 2;
       }
       &__detail {
-        max-width: 90%;
+        max-width: 100%;
       }
+
       Button {
         width: 100%;
       }

@@ -7,7 +7,7 @@ const Product = ({ product }) => {
     <div className='card'>
       <div className='card__image'>
         <Link to={`/product/${product._id}`}>
-          <img src={product.image} alt='' />
+          <img src={product.image} alt={product.name} />
         </Link>
         <span className='card__addtocart'>Add to Cart</span>
       </div>

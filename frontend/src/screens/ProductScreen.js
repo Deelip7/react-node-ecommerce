@@ -3,9 +3,8 @@ import products from '../products';
 import Rating from '../components/Rating';
 import { Button } from 'semantic-ui-react';
 
-console.log(products);
-
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ match, history }) => {
+  console.log(history);
   const product = products.find((e) => e._id === match.params.id);
 
   return (
@@ -24,8 +23,8 @@ const ProductScreen = ({ match }) => {
               ADD TO CART
             </Button>
           </div>
-          <div class='product__image'>
-            <img src={product.image} alt='' />
+          <div className='product__image'>
+            <img src={product.image} alt={product.name} />
           </div>
         </div>
       </div>

@@ -1,0 +1,23 @@
+{
+  "name": "react-node-ecommerce",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Rn Store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deelip7/react-node-ecommerce.git"
+  },
+  "author": "Theelipan Prabakar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Deelip7/react-node-ecommerce/issues"
+  },
+  "homepage": "https://github.com/Deelip7/react-node-ecommerce#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
