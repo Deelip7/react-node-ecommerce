@@ -1,11 +1,20 @@
-import React from 'react';
-import products from '../products';
+import React, { useState, useEffect } from 'react';
 import Rating from '../components/Rating';
 import { Button } from 'semantic-ui-react';
+import axios from 'axios';
 
-const ProductScreen = ({ match, history }) => {
-  console.log(history);
-  const product = products.find((e) => e._id === match.params.id);
+const ProductScreen = ({ match }) => {
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+
+      setProduct(data);
+    };
+
+    fetchProduct();
+  }, []);
 
   return (
     <>

@@ -1,8 +1,19 @@
-import React from 'react';
-import products from '../products';
+import React, { useState, useEffect } from 'react';
 import Product from '../components/Product';
+import axios from 'axios';
 
 const HomeScreen = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await axios.get('/api/products');
+      setProducts(data);
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <div className='card-container'>
