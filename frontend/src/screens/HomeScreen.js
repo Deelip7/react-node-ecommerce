@@ -1,27 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Product from '../components/Product';
-import axios from 'axios';
+import { listProducts } from '../actions/productActions';
+import { Dimmer, Loader, Message } from 'semantic-ui-react';
 
 const HomeScreen = () => {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+
+  const productList = useSelector((state) => state.productList);
+  const { loading, products, error } = productList;
 
   useEffect(() => {
-    async function fetchData() {
-      const { data } = await axios.get('/api/products');
-      setProducts(data);
-    }
+    dispatch(listProducts());
+  }, [dispatch]);
 
-    fetchData();
-  }, []);
+  console.log(error);
 
   return (
-    <div>
-      <div className='card-container'>
-        {products.map((product) => (
-          <Product product={product} key={product._id} />
-        ))}
-      </div>
-    </div>
+    <>
+      {loading ? (
+        <Dimmer active>
+          <Loader size='large' />
+        </Dimmer>
+      ) : error ? (
+        <div>
+          <Message style={{ margin: '0 auto', width: '50%' }} error header='Something went wrong. Please try again' list={[error]} />
+        </div>
+      ) : (
+        <div>
+          <div className='card-container'>
+            {products.map((product) => (
+              <Product product={product} key={product._id} />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

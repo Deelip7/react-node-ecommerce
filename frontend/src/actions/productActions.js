@@ -5,7 +5,7 @@ const listProducts = () => async (dispatch) => {
   try {
     dispatch({ type: actions.PRODUCT_LIST_REQUEST });
 
-    const { data } = axios.get(`/api/products`);
+    const { data } = await axios.get(`/api/products`);
 
     dispatch({
       type: actions.PRODUCT_LIST_SUCCESS,
@@ -18,3 +18,5 @@ const listProducts = () => async (dispatch) => {
     });
   }
 };
+
+export { listProducts };
