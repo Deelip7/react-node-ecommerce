@@ -14,8 +14,6 @@ const HomeScreen = () => {
     dispatch(listProducts());
   }, [dispatch]);
 
-  console.log(error);
-
   return (
     <>
       {loading ? (
