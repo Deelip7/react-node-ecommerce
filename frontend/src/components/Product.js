@@ -9,7 +9,15 @@ const Product = ({ product }) => {
         <Link to={`/product/${product._id}`}>
           <img src={product.image} alt={product.name} />
         </Link>
-        <span className='card__addtocart'>Add to Cart</span>
+        {product.numInStock === 0 ? (
+          <Link to={`/product/${product._id}`}>
+            <span className='card__addtocart'>Add to Cart</span>
+          </Link>
+        ) : (
+          <Link to={`/cart/${product._id}?qty=${1}`}>
+            <span className='card__addtocart'>Add to Cart</span>
+          </Link>
+        )}
       </div>
       <Link to={`/product/${product._id}`}>
         <div className='card__title'>{product.name}</div>

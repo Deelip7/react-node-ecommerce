@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Rating from '../components/Rating';
-import { Button } from 'semantic-ui-react';
 import { listProductDetails } from '../actions/productActions';
-// import { Dimmer, Loader, Message } from 'semantic-ui-react';
-import { Dimmer, Loader, Message, Form, Select } from 'semantic-ui-react';
+import { Dimmer, Loader, Message, Form, Select, Button } from 'semantic-ui-react';
 
 const ProductScreen = ({ match, history }) => {
   const dispatch = useDispatch(0);
@@ -52,8 +50,8 @@ const ProductScreen = ({ match, history }) => {
               </div>
 
               <Form className='product__form'>
-                <Form.Field control={Select} onChange={getQty} options={qtyOptions} defaultValue='1' disabled={product.numInStock === 0} />
-                <Button color='black' type='button' disabled={product.numInStock === 0} onClick={(e) => cartHandler()}>
+                <Form.Field control={Select} onChange={getQty} options={qtyOptions} defaultValue={1} disabled={product.numInStock === 0} />
+                <Button color='black' type='button' disabled={product.numInStock === 0} onClick={() => cartHandler()}>
                   ADD TO CART
                 </Button>
               </Form>
