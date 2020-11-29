@@ -21,6 +21,25 @@
       max-width: 30vw;
       color: #555555;
     }
+    &__form {
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+
+      .ui.form {
+        width: 9.56rem;
+      }
+
+      .ui.selection.dropdown {
+        border-radius: 0%;
+        min-width: 9.57rem;
+      }
+    }
+
+    Button {
+      margin-left: 0rem;
+      height: 2.712rem;
+    }
 
     @media screen and (max-width: 990px) {
       gap: 2rem;
@@ -42,8 +61,20 @@
         max-width: 100%;
       }
 
-      Button {
-        width: 100%;
+      &__form {
+        flex-direction: column;
+
+        .ui.form {
+          width: 100%;
+        }
+        .ui.selection.dropdown {
+          min-width: 100%;
+        }
+
+        Button {
+          margin-left: 0;
+          width: 100%;
+        }
       }
     }
 

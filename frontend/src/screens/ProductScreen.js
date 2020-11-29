@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Rating from '../components/Rating';
 import { Button } from 'semantic-ui-react';
 import { listProductDetails } from '../actions/productActions';
-import { Dimmer, Loader, Message } from 'semantic-ui-react';
+// import { Dimmer, Loader, Message } from 'semantic-ui-react';
+import { Dimmer, Loader, Message, Form, Select } from 'semantic-ui-react';
 
-const ProductScreen = ({ match }) => {
-  const dispatch = useDispatch();
+const ProductScreen = ({ match, history }) => {
+  const dispatch = useDispatch(0);
+
+  const [qty, setQty] = useState(1);
 
   const productDetails = useSelector((state) => state.productDetails);
 
@@ -15,6 +18,16 @@ const ProductScreen = ({ match }) => {
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match]);
+
+  const qtyOptions = [...Array(product.numInStock).keys()].map((p) => ({ text: `${p + 1}`, value: `${p + 1}` }));
+
+  const getQty = (e, { value }) => {
+    setQty(Number(value));
+  };
+
+  const cartHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
 
   return (
     <>
@@ -37,9 +50,13 @@ const ProductScreen = ({ match }) => {
                 <p>{product.detail}</p>
                 <div>{product.numInStock > 0 ? <span style={{ color: 'green' }}>In Stock.</span> : <span style={{ color: '#f68872' }}>Out Of Stock.</span>}</div>
               </div>
-              <Button color='black' disabled={product.numInStock > 0 ? false : true}>
-                ADD TO CART
-              </Button>
+
+              <Form className='product__form'>
+                <Form.Field control={Select} onChange={getQty} options={qtyOptions} defaultValue='1' disabled={product.numInStock === 0} />
+                <Button color='black' type='button' disabled={product.numInStock === 0} onClick={(e) => cartHandler()}>
+                  ADD TO CART
+                </Button>
+              </Form>
             </div>
             <div className='product__image'>
               <img src={product.image} alt={product.name} />
