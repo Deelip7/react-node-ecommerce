@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Form, Select, Button, Popup, Placeholder } from 'semantic-ui-react';
+import { Form, Select, Button, Popup } from 'semantic-ui-react';
 import { Divider } from 'semantic-ui-react';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 
