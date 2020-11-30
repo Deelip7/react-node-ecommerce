@@ -14,7 +14,7 @@ header {
 
     &__logo img {
       margin-right: 2rem;
-      height: 3.5rem;
+      height: 4rem;
     }
 
     &__search {
@@ -34,12 +34,22 @@ header {
 
       input {
         width: 100%;
+        height: 30px;
         background-color: initial;
         border: none;
         &:placeholder-shown {
           color: #a4a4a4;
         }
       }
+    }
+    .ui.menu {
+      border: 0;
+      box-shadow: none;
+      border-radius: 0;
+    }
+    .ui.menu .item {
+      padding: 0px 10px 0;
+      cursor: default;
     }
 
     &__cart {
@@ -54,11 +64,13 @@ header {
       font-size: 1.2rem;
       cursor: pointer;
       img {
-        padding: 0 6px 2px 0;
+        padding: 0 1px 2px 0;
       }
     }
 
     @media screen and (max-width: 645px) {
+      padding: 0 3.5vw;
+
       &__search {
         width: calc(100% - 2vw);
         order: 3;
@@ -66,10 +78,6 @@ header {
 
       &__logo {
         margin-right: auto;
-      }
-
-      &__dropdown {
-        margin-right: 1rem;
       }
     }
   }

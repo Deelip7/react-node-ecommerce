@@ -47,12 +47,12 @@
         gap: 30px;
 
         .ui.form {
-          width: 8.56rem;
+          width: 9.5rem;
         }
 
         .ui.selection.dropdown {
           border-radius: 0%;
-          min-width: 8.57rem;
+          min-width: 9.5rem;
         }
         Button {
           height: 2.7rem;
@@ -65,13 +65,16 @@
     flex-direction: column;
     margin-left: auto;
     margin-top: 3rem;
-    width: 190px;
+    width: 208px;
     gap: 10px;
+
     * {
       font-size: 1.3rem;
     }
+
     Button {
       width: 100%;
+      height: 3rem;
     }
   }
 

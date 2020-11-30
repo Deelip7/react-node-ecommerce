@@ -28,3 +28,25 @@ main {
 button {
   border-radius: 0 !important;
 }
+
+.ui.input > input {
+  border-radius: 0 !important;
+}
+
+.ui.form .field > label,
+.ui.divider {
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  font-size: 1.2rem !important;
+}
+.ui.button {
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  font-size: 1rem !important;
+}
+
+.ui.form .field > label,
+.ui.divider {
+  font-weight: 400 !important;
+  font-size: 1.1rem !important;
+}
