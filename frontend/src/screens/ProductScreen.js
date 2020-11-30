@@ -23,7 +23,7 @@ const ProductScreen = ({ match, history }) => {
     setQty(Number(value));
   };
 
-  const cartHandler = () => {
+  const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
@@ -50,8 +50,8 @@ const ProductScreen = ({ match, history }) => {
               </div>
 
               <Form className='product__form'>
-                <Form.Field control={Select} onChange={getQty} options={qtyOptions} defaultValue={1} disabled={product.numInStock === 0} />
-                <Button color='black' type='button' disabled={product.numInStock === 0} onClick={() => cartHandler()}>
+                <Form.Field control={Select} onChange={getQty} options={qtyOptions} defaultValue='1' disabled={product.numInStock === 0} />
+                <Button color='black' type='button' disabled={product.numInStock === 0} onClick={() => addToCartHandler()}>
                   ADD TO CART
                 </Button>
               </Form>

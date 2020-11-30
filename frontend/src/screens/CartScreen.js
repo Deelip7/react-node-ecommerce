@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Message } from 'semantic-ui-react';
+import { Breadcrumb, Button, Message } from 'semantic-ui-react';
 import { addToCart } from '../actions/cartActions';
 import CartItems from '../components/CartItems';
 
@@ -13,7 +13,10 @@ const CartScreen = ({ match, location, history }) => {
 
   const { cartItems } = useSelector((state) => state.cart);
 
-  const subTotal = cartItems.map((e) => e.price * e.qty).reduce((acc, curr) => acc + curr, 0);
+  const subTotal = cartItems
+    .map((e) => e.price * e.qty)
+    .reduce((acc, curr) => acc + curr, 0)
+    .toFixed(2);
 
   useEffect(() => {
     if (productId) {
@@ -44,8 +47,12 @@ const CartScreen = ({ match, location, history }) => {
             ))}
           </div>
           <div className='cart-subtotal'>
-            <h4>SubTotal</h4>
-            <div>{subTotal}</div>
+            <h4>
+              SubTotal: <span style={{ fontWeight: 'normal', float: 'right' }}>${subTotal}</span>
+            </h4>
+            <Button color='black' type='button'>
+              Proceed to checkout
+            </Button>
           </div>
         </>
       )}
