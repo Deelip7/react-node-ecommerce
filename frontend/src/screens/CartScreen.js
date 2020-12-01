@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, Button, Message } from 'semantic-ui-react';
 import { addToCart } from '../actions/cartActions';
+import CartEmpty from '../components/CartEmpty';
 import CartItems from '../components/CartItems';
 
 const CartScreen = ({ match, location, history }) => {
@@ -22,24 +23,25 @@ const CartScreen = ({ match, location, history }) => {
     if (productId) {
       dispatch(addToCart(productId, queryString));
     }
-  }, [location, match]);
+  }, [location, match, dispatch, productId, queryString]);
 
   return (
     <div className='cart-container'>
-      <header>
-        <Breadcrumb>
-          <Breadcrumb.Section as={Link} to='/'>
-            Home
-          </Breadcrumb.Section>
-          <Breadcrumb.Divider />
-          <Breadcrumb.Section>Cart</Breadcrumb.Section>
-        </Breadcrumb>
-        <h1>Your Cart</h1>
-      </header>
       {cartItems.length === 0 ? (
-        <Message style={{ margin: '0 auto', width: '50%' }} warning header='Cart Is Empty' list={['Add Item to Cart']}></Message>
+        // <Message style={{ margin: '0 auto', width: '50%' }} warning header='Cart Is Empty' list={['Add Item to Cart']}></Message>
+        <CartEmpty />
       ) : (
         <>
+          <header>
+            <Breadcrumb>
+              <Breadcrumb.Section as={Link} to='/'>
+                Home
+              </Breadcrumb.Section>
+              <Breadcrumb.Divider />
+              <Breadcrumb.Section>Cart</Breadcrumb.Section>
+            </Breadcrumb>
+            <h1>Your Cart</h1>
+          </header>
           <div>
             {cartItems.map((e) => (
               <CartItems key={e.product} items={e} />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Container, Divider, Form } from 'semantic-ui-react';
 
 const LoginScreen = () => {
@@ -16,14 +17,11 @@ const LoginScreen = () => {
             Submit
           </Button>
         </Form>
-        <Divider horizontal>New Customer?</Divider>
-      </Container>
-      <Container textAlign='center'>
-        <div style={style}>
-          <Button type='submit' style={{ width: '100%' }}>
-            Register
-          </Button>
-        </div>
+        <Divider horizontal>
+          <Link to='/'>
+            <p style={{ fontWeight: '100', fontSize: '18px', textAlign: 'center' }}>New Customer? REGISTER</p>
+          </Link>
+        </Divider>
       </Container>
     </>
   );
