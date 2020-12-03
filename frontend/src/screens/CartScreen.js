@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Button, Message } from 'semantic-ui-react';
+import { Breadcrumb, Button } from 'semantic-ui-react';
 import { addToCart } from '../actions/cartActions';
 import CartEmpty from '../components/CartEmpty';
 import CartItems from '../components/CartItems';
 
-const CartScreen = ({ match, location, history }) => {
+const CartScreen = ({ match, location }) => {
   const queryString = location.search.split('=')[1];
   const productId = match.params.id;
 
@@ -28,7 +28,6 @@ const CartScreen = ({ match, location, history }) => {
   return (
     <div className='cart-container'>
       {cartItems.length === 0 ? (
-        // <Message style={{ margin: '0 auto', width: '50%' }} warning header='Cart Is Empty' list={['Add Item to Cart']}></Message>
         <CartEmpty />
       ) : (
         <>

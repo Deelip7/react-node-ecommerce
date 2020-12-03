@@ -23,7 +23,6 @@ const getProductById = asyncHandler(async (req, res) => {
     throw new Error('Product not found');
     // 404 - not found
   }
-  res.json(products);
 });
 
 export { getProducts, getProductById };

@@ -7,7 +7,6 @@ const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
 
   const cartItemsNum = String(cartItems.reduce((a, { qty }) => a + qty, 0));
-  console.log('🚀 ~ file: Header.js ~ line 10 ~ Header ~ cartItemsNum', cartItemsNum);
 
   return (
     <header>

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Rating from '../components/Rating';
 import { listProductDetails } from '../actions/productActions';
-import { Dimmer, Loader, Message, Form, Select, Button } from 'semantic-ui-react';
+import { Dimmer, Loader, Form, Select, Button } from 'semantic-ui-react';
+import Page404 from '../components/Page404';
 
 const ProductScreen = ({ match, history }) => {
   const dispatch = useDispatch(0);
@@ -17,7 +18,7 @@ const ProductScreen = ({ match, history }) => {
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match]);
 
-  const qtyOptions = [...Array(product.numInStock).keys()].map((p) => ({ text: `${p + 1}`, value: `${p + 1}` }));
+  const qtyOptions = product ? [...Array(product.numInStock).keys()].map((p) => ({ text: `${p + 1}`, value: `${p + 1}` })) : [];
 
   const getQty = (e, { value }) => {
     setQty(Number(value));
@@ -34,9 +35,7 @@ const ProductScreen = ({ match, history }) => {
           <Loader size='large' />
         </Dimmer>
       ) : error ? (
-        <div>
-          <Message style={{ margin: '0 auto', width: '50%' }} error header='Something went wrong. Please try again' list={[error]} />
-        </div>
+        <Page404 />
       ) : (
         <div className='product-container'>
           <div className='product'>
