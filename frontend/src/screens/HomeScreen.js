@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Product from '../components/Product';
 import { listProducts } from '../actions/productActions';
-import { Dimmer, Loader, Message } from 'semantic-ui-react';
+import { Message } from 'semantic-ui-react';
+import Loader from '../components/Loader';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -17,9 +18,7 @@ const HomeScreen = () => {
   return (
     <>
       {loading ? (
-        <Dimmer active>
-          <Loader size='large' />
-        </Dimmer>
+        <Loader />
       ) : error ? (
         <div>
           <Message style={{ margin: '0 auto', width: '50%' }} error header='Something went wrong. Please try again' list={[error]} />

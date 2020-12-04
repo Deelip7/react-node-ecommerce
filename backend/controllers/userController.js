@@ -20,7 +20,7 @@ const authUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(401); //401 - Unauthorized
-    throw new Error('Unauthorized : Access is denied due to invalid credentials');
+    throw new Error('Invalid email or password');
   }
 });
 

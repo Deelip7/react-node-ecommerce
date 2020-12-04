@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Rating from '../components/Rating';
 import { listProductDetails } from '../actions/productActions';
-import { Dimmer, Loader, Form, Select, Button } from 'semantic-ui-react';
+import { Form, Select, Button } from 'semantic-ui-react';
 import Page404 from '../components/Page404';
+import Loader from '../components/Loader';
 
 const ProductScreen = ({ match, history }) => {
   const dispatch = useDispatch(0);
@@ -31,9 +32,7 @@ const ProductScreen = ({ match, history }) => {
   return (
     <>
       {loading ? (
-        <Dimmer active>
-          <Loader size='large' />
-        </Dimmer>
+        <Loader />
       ) : error ? (
         <Page404 />
       ) : (

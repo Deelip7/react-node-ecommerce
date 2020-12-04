@@ -6,7 +6,31 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const cartItemsNum = String(cartItems.reduce((a, { qty }) => a + qty, 0));
+
+  const trigger = (
+    <span>
+      <img src='/images/icons/user.svg' alt='' className='ui avatar image' />
+    </span>
+  );
+
+  const options = [
+    {
+      key: 'user',
+      text: (
+        <span>
+          Signed in as <strong>{userInfo.name.split(' ')[1]}</strong>
+        </span>
+      ),
+      disabled: true,
+    },
+    { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
+    { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
+    { key: 'sign-out', text: 'Sign Out', to: '/logout', as: Link },
+  ];
 
   return (
     <header>
@@ -24,19 +48,6 @@ const Header = () => {
           <input type='text' placeholder='Search'></input>
         </div>
 
-        <div className='nav__dropdown'>
-          <Dropdown pointing='top right' icon={<img src='/images/icons/user.svg' alt='' className='ui avatar image' />}>
-            <Dropdown.Menu style={{ boxShadow: 'none', padding: '15px', borderRadius: '0' }}>
-              <Link to='/profile'>
-                <Dropdown.Item icon={<img src='/images/icons/profile.svg' alt='' className='ui avatar image' />} text='Profile' style={{ backgroundColor: '#ffffff' }} />
-              </Link>
-              <Link to='/login'>
-                <Dropdown.Item icon={<img src='/images/icons/logout.svg' alt='' className='ui avatar image' />} text='Login' style={{ backgroundColor: '#ffffff' }} />
-              </Link>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
-
         <div className='nav__cart'>
           <Menu compact>
             <Menu.Item>
@@ -52,6 +63,10 @@ const Header = () => {
               )}
             </Menu.Item>
           </Menu>
+        </div>
+
+        <div className='nav__dropdown'>
+          <Dropdown trigger={trigger} options={options} direction='left' icon='' />
         </div>
       </div>
     </header>
