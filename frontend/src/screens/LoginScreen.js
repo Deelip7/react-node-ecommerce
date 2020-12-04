@@ -35,7 +35,7 @@ const LoginScreen = ({ history, location }) => {
         {loading && <Loader />}
         {error && <Message style={{ margin: '0 auto', width: '350px' }} error list={[error]} />}
         <Form style={{ margin: '5rem auto 4rem', maxWidth: '350px' }} onSubmit={(e) => loginHandler(e)}>
-          <Form.Input size='large' icon='user' iconPosition='left' label='Email Address' placeholder='Email Address' onChange={(e) => setEmail(e.target.value)} required />
+          <Form.Input size='large' icon='user' iconPosition='left' label='Email Address' type='email' placeholder='Email Address' onChange={(e) => setEmail(e.target.value)} required />
           <Form.Input size='large' icon='lock' iconPosition='left' label='Password' type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
           <Button color='black' type='submit' style={{ width: '100%' }}>
             Submit

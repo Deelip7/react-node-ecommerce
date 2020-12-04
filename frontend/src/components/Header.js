@@ -1,10 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown, Label, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { logout } from '../actions/userActions';
 
-const Header = () => {
+const Header = ({ location }) => {
   const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -17,20 +19,31 @@ const Header = () => {
     </span>
   );
 
-  const options = [
-    {
-      key: 'user',
-      text: (
-        <span>
-          Signed in as <strong>{userInfo.name.split(' ')[1]}</strong>
-        </span>
-      ),
-      disabled: true,
-    },
-    { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
-    { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
-    { key: 'sign-out', text: 'Sign Out', to: '/logout', as: Link },
-  ];
+  const logoutHandler = (e, { value }) => {
+    if (value === 'logout') {
+      dispatch(logout());
+    }
+  };
+
+  const options = userInfo
+    ? [
+        {
+          key: 'user',
+          text: (
+            <span>
+              Signed in as <strong>{userInfo.name.split(' ')[1] || userInfo.name}</strong>
+            </span>
+          ),
+          disabled: true,
+        },
+        { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
+        { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
+        { key: 'sign-out', text: 'Sign Out', value: 'logout' },
+      ]
+    : [
+        { key: 'sign-in', text: 'Sign In', to: '/login', as: Link, disabled: false, selected: false },
+        { key: 'register', text: 'Register', to: '/register', as: Link, disabled: false },
+      ];
 
   return (
     <header>
@@ -66,7 +79,7 @@ const Header = () => {
         </div>
 
         <div className='nav__dropdown'>
-          <Dropdown trigger={trigger} options={options} direction='left' icon='' />
+          <Dropdown trigger={trigger} options={options} direction='left' icon='' onChange={logoutHandler} />
         </div>
       </div>
     </header>
