@@ -14,15 +14,14 @@ const LoginScreen = ({ history, location }) => {
   const { loading, userInfo, error } = userLogin;
 
   const redirect = location.search ? location.search.split('=')[1] : '/';
+  console.log(redirect);
+  console.log(location);
 
-  useEffect(
-    (e) => {
-      if (userInfo) {
-        history.push(redirect);
-      }
-    },
-    [userInfo, history, redirect]
-  );
+  useEffect(() => {
+    if (userInfo) {
+      history.push(redirect);
+    }
+  }, [userInfo, history, redirect]);
 
   const loginHandler = (e) => {
     e.preventDefault();
