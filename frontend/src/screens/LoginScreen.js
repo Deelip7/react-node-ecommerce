@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Container, Divider, Form, Message } from 'semantic-ui-react';
+import { Button, Divider, Form, Message } from 'semantic-ui-react';
 import { login } from '../actions/userActions';
 import Loader from '../components/Loader';
+import FormContainer from '../components/FormContainer';
 
 const LoginScreen = ({ history, location }) => {
   const dispatch = useDispatch();
@@ -14,8 +15,6 @@ const LoginScreen = ({ history, location }) => {
   const { loading, userInfo, error } = userLogin;
 
   const redirect = location.search ? location.search.split('=')[1] : '/';
-  console.log(redirect);
-  console.log(location);
 
   useEffect(() => {
     if (userInfo) {
@@ -29,24 +28,24 @@ const LoginScreen = ({ history, location }) => {
   };
 
   return (
-    <>
-      <Container>
-        {loading && <Loader />}
-        {error && <Message style={{ margin: '0 auto', width: '350px' }} error list={[error]} />}
-        <Form style={{ margin: '5rem auto 4rem', maxWidth: '350px' }} onSubmit={(e) => loginHandler(e)}>
-          <Form.Input size='large' icon='user' iconPosition='left' label='Email Address' type='email' placeholder='Email Address' onChange={(e) => setEmail(e.target.value)} required />
-          <Form.Input size='large' icon='lock' iconPosition='left' label='Password' type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
-          <Button color='black' type='submit' style={{ width: '100%' }}>
-            Submit
-          </Button>
-        </Form>
-        <Divider horizontal>
-          <p style={{ fontWeight: '100', fontSize: '18px', textAlign: 'center' }}>
-            New Customer? <Link to={redirect ? `/register?redirect=${redirect}` : `/register`}>REGISTER </Link>
-          </p>
-        </Divider>
-      </Container>
-    </>
+    <FormContainer>
+      {loading && <Loader />}
+      {error && <Message error list={[error]} />}
+      <h1>Log in to your account</h1>
+      <Form onSubmit={(e) => loginHandler(e)}>
+        <Form.Input size='large' icon='user' iconPosition='left' label='Email Address' type='email' placeholder='Email Address' onChange={(e) => setEmail(e.target.value)} required />
+        <Form.Input size='large' icon='lock' iconPosition='left' label='Password' type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
+        <Button color='black' type='submit'>
+          Submit
+        </Button>
+      </Form>
+      <Divider horizontal>
+        <p>New Customer?</p>
+      </Divider>
+      <Link to={redirect ? `/register?redirect=${redirect}` : `/register`}>
+        <Button basic>REGISTER</Button>
+      </Link>
+    </FormContainer>
   );
 };
 

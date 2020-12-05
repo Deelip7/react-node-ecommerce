@@ -77,7 +77,6 @@ const Header = ({ location }) => {
             </Menu.Item>
           </Menu>
         </div>
-
         <div className='nav__dropdown'>
           <Dropdown trigger={trigger} options={options} direction='left' icon='' onChange={logoutHandler} />
         </div>

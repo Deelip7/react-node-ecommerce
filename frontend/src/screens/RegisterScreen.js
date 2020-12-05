@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Container, Divider, Form, Message } from 'semantic-ui-react';
+import { Button, Divider, Form, Message } from 'semantic-ui-react';
 import { register } from '../actions/userActions';
+import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 
 const RegisterScreen = ({ history, location }) => {
@@ -18,8 +19,6 @@ const RegisterScreen = ({ history, location }) => {
   const { loading, userInfo, error } = userRegister;
 
   const redirect = location.search ? location.search.split('=')[1] : '/';
-  console.log(redirect);
-  console.log(location);
 
   useEffect(() => {
     if (userInfo) {
@@ -37,11 +36,12 @@ const RegisterScreen = ({ history, location }) => {
   };
 
   return (
-    <Container>
+    <FormContainer>
       {loading && <Loader />}
-      {message && <Message style={{ margin: '0 auto', width: '350px' }} error list={[message]} />}
-      {error && <Message style={{ margin: '0 auto', width: '350px' }} error list={[error]} />}
-      <Form style={{ margin: '5rem auto 4rem', maxWidth: '350px' }} onSubmit={(e) => submitHandler(e)}>
+      {message && <Message error list={[message]} />}
+      {error && <Message error list={[error]} />}
+      <h1>Create your account</h1>
+      <Form onSubmit={(e) => submitHandler(e)}>
         <Form.Input size='large' icon='user' iconPosition='left' label='Name' placeholder='Name' onChange={(e) => setName(e.target.value)} required />
         <Form.Input size='large' icon='at' iconPosition='left' label='Email Address' type='email' placeholder='Email Address' onChange={(e) => setEmail(e.target.value)} required />
         <Form.Input size='large' icon='lock' iconPosition='left' label='Password' type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
@@ -60,11 +60,12 @@ const RegisterScreen = ({ history, location }) => {
         </Button>
       </Form>
       <Divider horizontal>
-        <p style={{ fontWeight: '100', fontSize: '18px', textAlign: 'center' }}>
-          Already have an account? <Link to={redirect ? `/login?redirect=${redirect}` : `/login`}>Sign in </Link>
-        </p>
+        <p>Already have an account?</p>
       </Divider>
-    </Container>
+      <Link to={redirect ? `/login?redirect=${redirect}` : `/login`}>
+        <Button basic>SIGN IN</Button>
+      </Link>
+    </FormContainer>
   );
 };
 

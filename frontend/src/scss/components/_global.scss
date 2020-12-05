@@ -22,14 +22,12 @@ a {
 }
 
 main {
-  min-height: 60vh;
+  min-height: 70vh;
 }
 
-button {
-  border-radius: 0 !important;
-}
-
-.ui.input > input {
+button,
+.ui.input > input,
+.ui.dropdown .menu {
   border-radius: 0 !important;
 }
 

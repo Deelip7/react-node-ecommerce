@@ -1,0 +1,55 @@
+.profile-Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 3.5rem auto 0;
+  padding: 0 2rem;
+  max-width: 1400px;
+  h1,
+  h2 {
+    font-weight: normal;
+  }
+  .user {
+    .profile {
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+
+      &__name {
+        color: #414141;
+      }
+      &__edit {
+        margin-right: 0;
+        margin-left: auto;
+      }
+    }
+    .ui.empty.circular.label,
+    .ui.empty.circular.labels .label {
+      margin-right: 0.5rem;
+    }
+    .order {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      flex-flow: row wrap;
+      gap: 2.5rem;
+
+      .ui.divider {
+        margin: 0;
+      }
+
+      &__details {
+        margin-left: 0;
+        // margin-right: auto;
+      }
+      @media screen and (max-width: 350px) {
+        padding: 1rem 0rem;
+        gap: 2rem;
+      }
+    }
+  }
+}
+
+.ui .modal {
+  border-radius: 0 !important;
+}

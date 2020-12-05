@@ -1,0 +1,22 @@
+.formContainer {
+  margin: 4rem auto 0;
+  max-width: 360px;
+  padding: 0 1rem;
+
+  h1 {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+  }
+  Form {
+    margin: 3rem 0 !important;
+  }
+  Button {
+    width: 100%;
+  }
+  a {
+    margin-top: 2.5rem;
+    text-align: center;
+    display: block;
+    font-size: 1.1rem;
+  }
+}
