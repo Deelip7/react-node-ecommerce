@@ -1,6 +1,7 @@
 import React from 'react';
 import Rating from '../components/Rating';
 import { Link } from 'react-router-dom';
+import { Button, Modal, Image, Label, Divider, Icon, Header } from 'semantic-ui-react';
 
 const Product = ({ product }) => {
   return (

@@ -18,7 +18,19 @@ const ProfileScreen = () => {
           <h1 className='profile__name'>{userInfo.name}</h1>
           <div className='profile__email'>{userInfo.email}</div>
           <div className='profile__edit'>
-            <Modal closeIcon trigger={<Button basic>Edit</Button>} content={<ProfileEdit />} actions={[{ key: 'save', content: 'Save', positive: true }]} />
+            <Modal
+              closeIcon
+              trigger={
+                <Button animated basic>
+                  <Button.Content hidden>Edit</Button.Content>
+                  <Button.Content visible>
+                    <Icon name='edit outline' />
+                  </Button.Content>
+                </Button>
+              }
+              content={<ProfileEdit />}
+              actions={[{ key: 'save', content: 'Save', positive: true }]}
+            />
           </div>
         </div>
         <div>

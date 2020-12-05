@@ -5,6 +5,7 @@
   margin: 3.5rem auto 0;
   padding: 0 2rem;
   max-width: 1400px;
+
   h1,
   h2 {
     font-weight: normal;
@@ -14,6 +15,8 @@
       height: 150px;
       display: flex;
       flex-direction: column;
+      //   border: 0.1rem solid #dededf;
+      margin-bottom: 2rem;
 
       &__name {
         color: #414141;
@@ -30,7 +33,7 @@
     .order {
       display: flex;
       justify-content: space-between;
-      padding: 1rem 1.5rem;
+      padding: 2rem 0rem;
       flex-flow: row wrap;
       gap: 2.5rem;
 
@@ -43,7 +46,6 @@
         // margin-right: auto;
       }
       @media screen and (max-width: 350px) {
-        padding: 1rem 0rem;
         gap: 2rem;
       }
     }
