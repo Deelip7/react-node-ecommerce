@@ -31,41 +31,43 @@ const RegisterScreen = ({ history, location }) => {
     if (password === confirmPassword) {
       dispatch(register(name, email, password));
     } else {
-      setMessage('password does not match');
+      setMessage('Password does not match');
     }
   };
 
   return (
-    <FormContainer>
+    <>
       {loading && <Loader />}
-      {message && <Message error list={[message]} />}
       {error && <Message error list={[error]} />}
-      <h1>Create your account</h1>
-      <Form onSubmit={(e) => submitHandler(e)}>
-        <Form.Input size='large' icon='user' iconPosition='left' label='Name' placeholder='Name' onChange={(e) => setName(e.target.value)} required />
-        <Form.Input size='large' icon='at' iconPosition='left' label='Email Address' type='email' placeholder='Email Address' onChange={(e) => setEmail(e.target.value)} required />
-        <Form.Input size='large' icon='lock' iconPosition='left' label='Password' type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
-        <Form.Input
-          size='large'
-          icon='lock'
-          iconPosition='left'
-          label='Confirm Password'
-          type='password'
-          placeholder='Confirm Password'
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <Button color='black' type='submit' style={{ width: '100%' }}>
-          Submit
-        </Button>
-      </Form>
-      <Divider horizontal>
-        <p>Already have an account?</p>
-      </Divider>
-      <Link to={redirect ? `/login?redirect=${redirect}` : `/login`}>
-        <Button basic>SIGN IN</Button>
-      </Link>
-    </FormContainer>
+      <FormContainer>
+        {message && <Message error list={[message]} />}
+        <h1>Create your account</h1>
+        <Form onSubmit={(e) => submitHandler(e)}>
+          <Form.Input size='large' icon='user' iconPosition='left' label='Name' placeholder='Name' onChange={(e) => setName(e.target.value)} required />
+          <Form.Input size='large' icon='at' iconPosition='left' label='Email Address' type='email' placeholder='Email Address' onChange={(e) => setEmail(e.target.value)} required />
+          <Form.Input size='large' icon='lock' iconPosition='left' label='Password' type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
+          <Form.Input
+            size='large'
+            icon='lock'
+            iconPosition='left'
+            label='Confirm Password'
+            type='password'
+            placeholder='Confirm Password'
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <Button color='black' type='submit' style={{ width: '100%' }}>
+            Submit
+          </Button>
+        </Form>
+        <Divider horizontal>
+          <p>Already have an account?</p>
+        </Divider>
+        <Link to={redirect ? `/login?redirect=${redirect}` : `/login`}>
+          <Button basic>SIGN IN</Button>
+        </Link>
+      </FormContainer>
+    </>
   );
 };
 

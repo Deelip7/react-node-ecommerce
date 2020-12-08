@@ -28,24 +28,26 @@ const LoginScreen = ({ history, location }) => {
   };
 
   return (
-    <FormContainer>
+    <>
       {loading && <Loader />}
-      {error && <Message error list={[error]} />}
-      <h1>Log in to your account</h1>
-      <Form onSubmit={(e) => loginHandler(e)}>
-        <Form.Input size='large' icon='user' iconPosition='left' label='Email Address' type='email' placeholder='Email Address' onChange={(e) => setEmail(e.target.value)} required />
-        <Form.Input size='large' icon='lock' iconPosition='left' label='Password' type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
-        <Button color='black' type='submit'>
-          Submit
-        </Button>
-      </Form>
-      <Divider horizontal>
-        <p>New Customer?</p>
-      </Divider>
-      <Link to={redirect ? `/register?redirect=${redirect}` : `/register`}>
-        <Button basic>REGISTER</Button>
-      </Link>
-    </FormContainer>
+      <FormContainer>
+        {error && <Message error list={[error]} />}
+        <h1>Log in to your account</h1>
+        <Form onSubmit={(e) => loginHandler(e)}>
+          <Form.Input size='large' icon='user' iconPosition='left' label='Email Address' type='email' placeholder='Email Address' onChange={(e) => setEmail(e.target.value)} required />
+          <Form.Input size='large' icon='lock' iconPosition='left' label='Password' type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
+          <Button color='black' type='submit'>
+            Submit
+          </Button>
+        </Form>
+        <Divider horizontal>
+          <p>New Customer?</p>
+        </Divider>
+        <Link to={redirect ? `/register?redirect=${redirect}` : `/register`}>
+          <Button basic>REGISTER</Button>
+        </Link>
+      </FormContainer>
+    </>
   );
 };
 

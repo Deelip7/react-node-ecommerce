@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateTokens.js';
 
 // @desc Auth user and get Token
-// @route GET /api/users/login
+// @route POST /api/users/login
 // @acess Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -76,4 +76,32 @@ const getUserprofile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserprofile, registerUser };
+// @desc Update user Profile
+// @route PUT /api/users/profile
+// @acess Private
+const updateUserprofile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.name = req.body.name || req.user.name;
+    user.email = req.body.email || req.user.email;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error('User Not Found');
+  }
+});
+
+export { authUser, getUserprofile, registerUser, updateUserprofile };
