@@ -34,7 +34,7 @@ const ShippingScreen = ({ history }) => {
     <>
       {address ? (
         <>
-          <OrderSteps step={'address'}></OrderSteps>
+          <OrderSteps step={'address'} />
           <FormContainer>
             <h1>Shipping</h1>
             <Form onSubmit={(e) => submitHandler(e)}>

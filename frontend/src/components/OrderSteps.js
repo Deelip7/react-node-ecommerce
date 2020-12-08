@@ -5,7 +5,7 @@ const OrderSteps = ({ step }) => {
   return (
     <div className='order-steps'>
       <Step.Group size='small'>
-        <Step active={step === 'address' ? true : false} disabled={step !== 'address' ? true : false}>
+        <Step active={step === 'address' ? true : false}>
           <Icon name='address book outline' />
           <Step.Content>
             <Step.Title>Shipping</Step.Title>
@@ -13,7 +13,7 @@ const OrderSteps = ({ step }) => {
           </Step.Content>
         </Step>
 
-        <Step active={step === 'billing' ? true : false} disabled={step !== 'billing' ? true : false}>
+        <Step active={step === 'billing' ? true : false} disabled={step !== 'billing' ? (step === 'confirm' ? false : true) : false}>
           <Icon name='payment' />
           <Step.Content>
             <Step.Title>Billing</Step.Title>
