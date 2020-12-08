@@ -112,6 +112,12 @@ export const updateUserDetails = (user) => async (dispatch, getState) => {
       type: actions.USER_UPDATE_SUCCESS,
       payload: data,
     });
+    dispatch({
+      type: actions.USER_LOGIN_SUCCESS,
+      payload: data,
+    });
+
+    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: actions.USER_UPDATE_FAIL,

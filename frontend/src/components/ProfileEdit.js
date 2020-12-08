@@ -30,7 +30,7 @@ const ProfileEdit = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage('password does not match');
+      setMessage('Password does not match');
     } else {
       dispatch(updateUserDetails({ id: user._id, name, email, password }));
     }
@@ -39,11 +39,10 @@ const ProfileEdit = () => {
   return (
     <>
       {loading && <Loader />}
-      {error && <Message error list={[error]} />}
+      {error && <Message error content={error} />}
       <FormContainer>
-        {error && <Message error list={[error]} />}
-        {message && <Message error list={[message]} />}
-        {success && <Message success list={['Your profile was successfully updated']} />}
+        {message && <Message error content={message} />}
+        {success && <Message success content={'Your profile was successfully updated'} />}
         <h1>Edit your account details</h1>
         <Form onSubmit={(e) => submitHandler(e)}>
           <Form.Input size='large' icon='user' iconPosition='left' label='Name' placeholder='Name' onChange={(e) => setName(e.target.value)} value={name} />

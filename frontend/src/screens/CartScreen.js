@@ -6,7 +6,7 @@ import { addToCart } from '../actions/cartActions';
 import CartEmpty from '../components/CartEmpty';
 import CartItems from '../components/CartItems';
 
-const CartScreen = ({ match, location }) => {
+const CartScreen = ({ match, location, history }) => {
   const queryString = location.search.split('=')[1];
   const productId = match.params.id;
 
@@ -24,6 +24,10 @@ const CartScreen = ({ match, location }) => {
       dispatch(addToCart(productId, queryString));
     }
   }, [location, match, dispatch, productId, queryString]);
+
+  const checkoutHandler = () => {
+    history.push('/login?redirect=shipping');
+  };
 
   return (
     <div className='cart-container'>
@@ -50,7 +54,7 @@ const CartScreen = ({ match, location }) => {
             <h4>
               SubTotal: <span style={{ fontWeight: 'normal', float: 'right' }}>${subTotal}</span>
             </h4>
-            <Button color='black' type='button'>
+            <Button color='black' type='button' onClick={checkoutHandler}>
               Proceed to checkout
             </Button>
           </div>
