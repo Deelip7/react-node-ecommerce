@@ -1,0 +1,48 @@
+.order-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 3.5rem auto 0;
+  padding: 0 2rem;
+  max-width: 1400px;
+
+  header {
+    padding: 1rem 0rem;
+  }
+
+  .order-details {
+    width: 70%;
+
+    .order-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 1rem;
+
+      &__image {
+        img {
+          width: 60px;
+          display: block;
+          @media screen and (max-width: 400px) {
+            width: 50px;
+          }
+        }
+      }
+      &__info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 80%;
+      }
+    }
+  }
+  .order-summary {
+    width: 30%;
+  }
+}
+
+.order-steps {
+  margin: 3rem auto !important;
+  text-align: center;
+}
