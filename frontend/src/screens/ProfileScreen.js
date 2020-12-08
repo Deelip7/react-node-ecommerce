@@ -36,6 +36,7 @@ const ProfileScreen = ({ history }) => {
             <div className='profile__email'>{user.email}</div>
             <div className='profile__edit'>
               <Modal
+                defaultOpen={false}
                 closeIcon
                 trigger={
                   <Button animated basic>

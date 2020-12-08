@@ -41,4 +41,17 @@ const userDetailsReducer = (state = { user: {} }, action) => {
   }
 };
 
-export { userLoginReducer, userRegisterReducer, userDetailsReducer };
+const userUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case actions.USER_UPDATE_REQUEST:
+      return { loading: true };
+    case actions.USER_UPDATE_SUCCESS:
+      return { loading: false, success: true, userInfo: action.payload };
+    case actions.USER_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateReducer };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Divider, Form, Message } from 'semantic-ui-react';
-import { userLogin } from '../actions/userActions';
+import { updateUserDetails, userLogin } from '../actions/userActions';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 
@@ -16,11 +16,15 @@ const ProfileEdit = () => {
   const [message, setMessage] = useState();
 
   const userDetails = useSelector((state) => state.userDetails);
-  const { loading, user, error } = userDetails;
+  const { user } = userDetails;
+
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const { loading, success, error } = userUpdate;
 
   useEffect(() => {
     setName(user.name);
     setEmail(user.email);
+    setPassword(user.password);
   }, [user]);
 
   const submitHandler = (e) => {
@@ -28,14 +32,18 @@ const ProfileEdit = () => {
     if (password !== confirmPassword) {
       setMessage('password does not match');
     } else {
+      dispatch(updateUserDetails({ id: user._id, name, email, password }));
     }
   };
 
   return (
     <>
+      {loading && <Loader />}
+      {error && <Message error list={[error]} />}
       <FormContainer>
         {error && <Message error list={[error]} />}
         {message && <Message error list={[message]} />}
+        {success && <Message success list={['Your profile was successfully updated']} />}
         <h1>Edit your account details</h1>
         <Form onSubmit={(e) => submitHandler(e)}>
           <Form.Input size='large' icon='user' iconPosition='left' label='Name' placeholder='Name' onChange={(e) => setName(e.target.value)} value={name} />
@@ -43,7 +51,7 @@ const ProfileEdit = () => {
           <Form.Input size='large' icon='lock' iconPosition='left' label='Password' type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
           <Form.Input size='large' icon='lock' iconPosition='left' label='Confirm Password' type='password' placeholder='Confirm Password' onChange={(e) => setConfirmPassword(e.target.value)} />
           <Button color='black' type='submit' style={{ width: '100%' }}>
-            Submit
+            Update
           </Button>
         </Form>
       </FormContainer>
