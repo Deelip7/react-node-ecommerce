@@ -1,30 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Icon, Step } from 'semantic-ui-react';
 
 const OrderSteps = ({ step }) => {
   return (
     <div className='order-steps'>
-      <Step.Group size='small'>
-        <Step active={step === 'address' ? true : false}>
-          <Icon name='address book outline' />
-          <Step.Content>
-            <Step.Title>Shipping</Step.Title>
-            <Step.Description>Choose your shipping address</Step.Description>
-          </Step.Content>
+      <Step.Group size='small' widths={3} style={{ maxWidth: '1000px' }} ordered unstackable>
+        <Step active={step === 'address' ? true : false} completed={step === 'address' ? false : true}>
+          <Link to='/shipping'>
+            <Step.Content>
+              <Step.Title>Shipping</Step.Title>
+            </Step.Content>
+          </Link>
         </Step>
-
-        <Step active={step === 'billing' ? true : false} disabled={step !== 'billing' ? (step === 'confirm' ? false : true) : false}>
-          <Icon name='payment' />
-          <Step.Content>
-            <Step.Title>Billing</Step.Title>
-            <Step.Description>Enter billing information</Step.Description>
-          </Step.Content>
+        <Step active={step === 'billing' ? true : false} disabled={step !== 'billing' ? (step === 'confirm' ? false : true) : false} completed={step === 'confirm' ? true : false}>
+          <Link to='/payment'>
+            <Step.Content>
+              <Step.Title>Payment Method</Step.Title>
+            </Step.Content>
+          </Link>
         </Step>
 
         <Step active={step === 'confirm' ? true : false} disabled={step !== 'confirm' ? true : false}>
-          <Icon name='info' />
           <Step.Content>
-            <Step.Title>Confirm Order</Step.Title>
+            <Step.Title>Place Order</Step.Title>
           </Step.Content>
         </Step>
       </Step.Group>

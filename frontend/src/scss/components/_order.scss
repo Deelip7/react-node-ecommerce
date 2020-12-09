@@ -1,17 +1,19 @@
 .order-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  margin: 3.5rem auto 0;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 4rem auto 0;
   padding: 0 2rem;
   max-width: 1400px;
 
-  header {
-    padding: 1rem 0rem;
+  h2 {
+    text-transform: uppercase;
+    font-size: 1.6rem;
   }
 
   .order-details {
-    width: 70%;
+    width: 65%;
 
     .order-item {
       display: flex;
@@ -33,16 +35,54 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        width: 80%;
+        width: 85%;
       }
     }
   }
   .order-summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
     width: 30%;
+    &__amount {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .button {
+      width: 100% !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+    padding: 1.5rem;
+    flex-direction: column;
+    gap: 2rem;
+    .order-details {
+      width: 100%;
+
+      .order-item {
+        width: 90%;
+      }
+    }
+    .order-summary {
+      width: 100%;
+    }
   }
 }
 
 .order-steps {
   margin: 3rem auto !important;
   text-align: center;
+}
+
+.ui.basic.table tr:last-child {
+  // color: #ff6600;
+  font-size: 1.4rem;
+}
+
+.ui.divider {
+  margin: 1.5rem 0 !important;
 }

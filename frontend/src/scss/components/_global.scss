@@ -48,3 +48,40 @@ button,
   font-weight: 400 !important;
   font-size: 1.1rem !important;
 }
+
+.ui.steps {
+  border-radius: 0 !important;
+}
+.ui.steps .step.active {
+  background-color: #f3f3f3 !important;
+}
+.ui.steps .step {
+  padding: 0.8rem 1rem !important;
+  border-radius: 0 !important;
+}
+.ui.steps .step.active .title {
+  color: #414141 !important;
+}
+
+// .ui.ordered.steps .step.completed::before,
+// .ui.steps .step.completed > .icon::before {
+//   color: #21ba45 !important;
+// }
+
+.ui.ordered.steps .step::before {
+  font-size: 1.5em !important;
+  font-weight: 100 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .ui.steps .step {
+    padding: 0.54285714em 1em !important;
+    border-radius: 0 !important;
+  }
+  .ui.ordered.steps .step * {
+    font-size: 0.9rem;
+  }
+  .ui.ordered.steps .step::before {
+    display: none !important;
+  }
+}

@@ -30,7 +30,7 @@ const OrderItems = ({ items }) => {
           </div>
         </div>
       </div>
-      <Divider style={{ margin: '.5rem 0', width: '90%' }} />
+      <Divider style={{ margin: '.5rem 0', width: '95%' }} />
     </>
   );
 };
