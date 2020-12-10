@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Form, Checkbox, Button, Radio } from 'semantic-ui-react';
 import FormContainer from '../components/FormContainer';
-import { Form, Checkbox, Button } from 'semantic-ui-react';
 import OrderSteps from '../components/OrderSteps';
+import { savePaymentMethod } from '../actions/cartActions';
 
 const PaymentScreen = ({ history }) => {
+  const dispatch = useDispatch();
+
+  const [paymentMethod, setPaymentMethod] = useState('PayPal');
+
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(savePaymentMethod(paymentMethod));
     history.push('/placeorder');
   };
 
@@ -15,10 +22,9 @@ const PaymentScreen = ({ history }) => {
       <FormContainer>
         <h1>Selected Payment Method</h1>
         <Form onSubmit={(e) => submitHandler(e)}>
-          <Form.Field>Payment Method</Form.Field>
-          <Form.Field>
-            <Checkbox defaultChecked radio label='PayPal or Credit Card' name='checkboxRadioGroup' value='paypal' />
-          </Form.Field>
+          <Form.Field control={Radio} label='PayPal or Credit Card' checked={paymentMethod === 'PayPal'} value='PayPal' onClick={() => setPaymentMethod('PayPal')} />
+          <Form.Field control={Radio} label='Apple Pay ' checked={paymentMethod === 'applePay'} value='applePay' onClick={() => setPaymentMethod('applePay')} disabled />
+          <Form.Field control={Radio} label='Amazon Pay ' checked={paymentMethod === 'amazonPay'} value='amazonPay' onClick={() => setPaymentMethod('amazonPay')} disabled />
           <Button color='black' type='submit' style={{ width: '100%', marginTop: '2rem' }}>
             Continue
           </Button>

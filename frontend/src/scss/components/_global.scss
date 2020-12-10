@@ -63,6 +63,10 @@ button,
   color: #414141 !important;
 }
 
+.ui.ordered.steps .step * {
+  font-weight: 500 !important;
+  font-size: 0.9rem;
+}
 // .ui.ordered.steps .step.completed::before,
 // .ui.steps .step.completed > .icon::before {
 //   color: #21ba45 !important;
