@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, Step } from 'semantic-ui-react';
+import { Step } from 'semantic-ui-react';
 
 const OrderSteps = ({ step }) => {
   return (

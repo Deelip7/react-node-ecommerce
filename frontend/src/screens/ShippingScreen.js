@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button, Form, Message } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 import { saveShippingAddress } from '../actions/cartActions';
 import FormContainer from '../components/FormContainer';
-import Loader from '../components/Loader';
 import OrderSteps from '../components/OrderSteps';
 
 const ShippingScreen = ({ history }) => {

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Button, Divider, Form, Message } from 'semantic-ui-react';
-import { updateUserDetails, userLogin } from '../actions/userActions';
+import { Button, Form, Message } from 'semantic-ui-react';
+import { updateUserDetails } from '../actions/userActions';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 

@@ -44,10 +44,9 @@ const PlaceOrderScreen = ({ history }) => {
     );
   };
 
-  console.log(order);
   useEffect(() => {
     if (success) {
-      history.push(`/order/${order._id}`);
+      history.push(`/orders/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
       dispatch({ type: CART_RESET });
       localStorage.removeItem('cartItems');

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Form, Checkbox, Button, Radio } from 'semantic-ui-react';
+import { Form, Button, Radio } from 'semantic-ui-react';
 import FormContainer from '../components/FormContainer';
 import OrderSteps from '../components/OrderSteps';
 import { savePaymentMethod } from '../actions/cartActions';
