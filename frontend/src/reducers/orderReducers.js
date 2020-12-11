@@ -1,6 +1,6 @@
 import * as actions from '../constants/orderConstants';
 
-export const orderCreateReducer = (state = { order: {} }, action) => {
+export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case actions.ORDER_CREATE_REQUEST:
       return {
@@ -17,6 +17,9 @@ export const orderCreateReducer = (state = { order: {} }, action) => {
         loading: false,
         error: action.payload,
       };
+    case actions.ORDER_CREATE_RESET:
+      return {};
+
     default:
       return state;
   }

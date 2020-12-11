@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Divider, Icon, Table } from 'semantic-ui-react';
+import { Button, Divider, Icon, Message, Table } from 'semantic-ui-react';
 import { createOrder } from '../actions/orderActions';
 import CartEmpty from '../components/CartEmpty';
 import OrderItems from '../components/OrderItems';
 import OrderSteps from '../components/OrderSteps';
+import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const PlaceOrderScreen = ({ history }) => {
     dispatch(
       createOrder({
         orderItems: cartItems,
-        shipping: shippingAddress,
+        shippingAddress,
         paymentMethod,
         itemsPrice: cart.itemsPrice,
         shippingCost: cart.shippingCost,
@@ -42,12 +43,13 @@ const PlaceOrderScreen = ({ history }) => {
     );
   };
 
+  console.log(order);
   useEffect(() => {
     if (success) {
-      // history.push(`/order/${order}`);
-      console.log(order);
+      history.push(`/order/${order._id}`);
+      dispatch({ type: ORDER_CREATE_RESET });
     }
-  });
+  }, [success, history, dispatch, order]);
 
   return (
     <>
@@ -105,6 +107,7 @@ const PlaceOrderScreen = ({ history }) => {
             <Divider horizontal>
               <p>OR</p>
             </Divider>
+            {error && <Message error list={[error]} />}
 
             <Link to='/'>
               <Button className='order-summary__button' basic type='button'>

@@ -3,7 +3,9 @@ import axios from 'axios';
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
-    dispatch({ type: actions.ORDER_CREATE_REQUEST });
+    dispatch({
+      type: actions.ORDER_CREATE_REQUEST,
+    });
 
     const {
       userLogin: { userInfo },

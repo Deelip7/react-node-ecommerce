@@ -8,7 +8,7 @@ const orderSchema = mongoose.Schema(
       ref: 'User',
     },
 
-    orderItem: [
+    orderItems: [
       {
         name: {
           type: String,
@@ -34,7 +34,7 @@ const orderSchema = mongoose.Schema(
       },
     ],
 
-    shipping: {
+    shippingAddress: {
       address: { type: String, required: true },
       city: { type: String, required: true },
       postalCode: { type: String, required: true },
@@ -53,6 +53,11 @@ const orderSchema = mongoose.Schema(
       email_address: { type: String },
     },
 
+    itemsPrice: {
+      type: Number,
+      required: true,
+      default: 0.0,
+    },
     taxPrice: {
       type: Number,
       required: true,
