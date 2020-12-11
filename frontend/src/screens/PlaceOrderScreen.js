@@ -2,27 +2,52 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Divider, Icon, Table } from 'semantic-ui-react';
-import { addToCart } from '../actions/cartActions';
+import { createOrder } from '../actions/orderActions';
 import CartEmpty from '../components/CartEmpty';
 import OrderItems from '../components/OrderItems';
 import OrderSteps from '../components/OrderSteps';
 
-const PlaceOrderScreen = () => {
+const PlaceOrderScreen = ({ history }) => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems, shippingAddress, paymentMethod } = useSelector((state) => state.cart);
 
+  if (!paymentMethod) {
+    history.push('/payment');
+  }
+
   const priceFormat = (price) => {
-    return +Math.round((price * 100) / 100).toFixed(2);
+    return (Math.round(price * 100) / 100).toFixed(2);
   };
 
-  cart.itemsPrice = priceFormat(cartItems.map((e) => e.price * e.qty).reduce((acc, curr) => acc + curr, 0));
+  cart.itemsPrice = priceFormat(cartItems.reduce((acc, curr) => acc + curr.price * curr.qty, 0));
   cart.shippingCost = priceFormat(cart.itemsPrice > 130 ? 0 : 15);
   cart.tax = priceFormat((cart.itemsPrice / 100) * 2);
-  cart.orderTotal = cart.itemsPrice + cart.tax + cart.shippingCost;
+  cart.orderTotal = (Number(cart.itemsPrice) + Number(cart.tax) + Number(cart.shippingCost)).toFixed(2);
+
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
 
   const checkoutHandler = (e) => {
-    console.log(e);
+    dispatch(
+      createOrder({
+        orderItems: cartItems,
+        shipping: shippingAddress,
+        paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingCost: cart.shippingCost,
+        taxPrice: cart.tax,
+        orderTotal: cart.orderTotal,
+      })
+    );
   };
+
+  useEffect(() => {
+    if (success) {
+      // history.push(`/order/${order}`);
+      console.log(order);
+    }
+  });
 
   return (
     <>
@@ -67,7 +92,7 @@ const PlaceOrderScreen = () => {
                     <Table.Cell textAlign='right'> ${cart.tax}</Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell>Order total:</Table.Cell>
+                    <Table.Cell>Total:</Table.Cell>
                     <Table.Cell textAlign='right'>${cart.orderTotal}</Table.Cell>
                   </Table.Row>
                 </Table.Body>
