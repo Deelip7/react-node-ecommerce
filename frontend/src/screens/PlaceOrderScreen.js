@@ -6,6 +6,7 @@ import { createOrder } from '../actions/orderActions';
 import CartEmpty from '../components/CartEmpty';
 import OrderItems from '../components/OrderItems';
 import OrderSteps from '../components/OrderSteps';
+import { CART_RESET } from '../constants/cartConstants';
 import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
 const PlaceOrderScreen = ({ history }) => {
@@ -48,6 +49,8 @@ const PlaceOrderScreen = ({ history }) => {
     if (success) {
       history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
+      dispatch({ type: CART_RESET });
+      localStorage.removeItem('cartItems');
     }
   }, [success, history, dispatch, order]);
 
