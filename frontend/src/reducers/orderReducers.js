@@ -64,7 +64,7 @@ export const orderPayReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
-    case actions.ORDER_PAY_FAIL:
+    case actions.ORDER_PAY_RESET:
       return {};
 
     default:

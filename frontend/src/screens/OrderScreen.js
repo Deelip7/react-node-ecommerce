@@ -1,27 +1,58 @@
-import React, { useEffect } from 'react';
+import axios from 'axios';
+import { PayPalButton } from 'react-paypal-button-v2';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Divider, Icon, Message, Table } from 'semantic-ui-react';
 import OrderItems from '../components/OrderItems';
-import { getOrderDetails } from '../actions/orderActions';
+import { getOrderDetails, updateOrderToPaid } from '../actions/orderActions';
 import Page404 from '../components/Page404';
 import Loader from '../components/Loader';
+import { ORDER_PAY_RESET } from '../constants/orderConstants';
 
 const OrderScreen = ({ match, history }) => {
+  const orderId = match.params.id;
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const [sdkLoaded, setSdkLoaded] = useState(false);
+
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, order, error } = orderDetails;
 
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: payLoading, success: paySuccess } = orderPay;
+
   useEffect(() => {
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get(`/api/config/paypal`);
+
+      const script = document.createElement('script');
+
+      script.type = 'text/javascript';
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+
+      script.onload = () => setSdkLoaded(true);
+
+      document.body.appendChild(script);
+    };
+
     if (!userInfo) {
       history.push('/login');
-    } else if (!order || order._id !== match.params.id) {
-      dispatch(getOrderDetails(match.params.id));
+    } else if (!order || paySuccess || order._id !== orderId) {
+      dispatch(getOrderDetails(orderId));
+      dispatch({
+        type: ORDER_PAY_RESET,
+      });
+      if (!window.paypal) {
+        addPayPalScript();
+      } else {
+        setSdkLoaded(true);
+      }
     }
-  }, [dispatch, match, userInfo, history, order]);
+  }, [dispatch, orderId, userInfo, history, order, paySuccess]);
 
   const priceFormat = (price) => {
     return (Math.round(price * 100) / 100).toFixed(2);
@@ -34,6 +65,11 @@ const OrderScreen = ({ match, history }) => {
     order.orderTotal = priceFormat(order.orderTotal);
     order.createdAt = order.createdAt.split('T')[0];
   }
+  const successPaymentHandler = (paymentResult) => {
+    console.log(paymentResult);
+
+    dispatch(updateOrderToPaid(orderId, paymentResult));
+  };
 
   return loading ? (
     <Loader />
@@ -117,6 +153,12 @@ const OrderScreen = ({ match, history }) => {
             </Table.Body>
           </Table>
         </div>
+        {!order.isPaid && (
+          <div>
+            {payLoading && <Loader />}
+            {!sdkLoaded ? <Loader /> : <PayPalButton amount={order.orderTotal} onSuccess={successPaymentHandler} />}
+          </div>
+        )}
       </div>
     </div>
   );
