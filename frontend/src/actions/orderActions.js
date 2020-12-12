@@ -74,7 +74,7 @@ export const updateOrderToPaid = (orderId, paymentResult) => async (dispatch, ge
 
     const config = {
       headers: {
-        'Content-Type': 'appplication/json',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
