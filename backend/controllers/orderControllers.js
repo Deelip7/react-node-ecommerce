@@ -31,6 +31,20 @@ const createOrder = asyncHandler(async (req, res) => {
 // @route GET /api/orders/:id
 // @acess Private
 const getOrderbyId = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id).populate('user', 'name email');
+
+  if (order) {
+    res.status(200).json(order);
+  } else {
+    res.status(400);
+    throw new Error('Order not found');
+  }
+});
+
+// @desc Update order to paid
+// @route GET /api/orders/:id
+// @acess Private
+const updateOrderbyId = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
 
   if (order) {

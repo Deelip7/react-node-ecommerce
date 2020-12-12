@@ -32,7 +32,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
   }
 };
 
-export const orderListDetails = (id) => async (dispatch, getState) => {
+export const getOrderDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: actions.ORDER_LIST_REQUEST,
@@ -44,7 +44,6 @@ export const orderListDetails = (id) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
