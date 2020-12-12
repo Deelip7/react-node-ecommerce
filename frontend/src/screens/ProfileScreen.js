@@ -59,35 +59,31 @@ const ProfileScreen = ({ history }) => {
                 />
               </div>
             </div>
-            <div className='order'>
+            <div className='order-Container'>
               <div>
                 <h1>Orders</h1>
                 <p>2 Items</p>
+                <Divider />
               </div>
-              <Divider horizontal>
-                <Header as='h4' floated='right'>
-                  <Label as='a' tag>
-                    $10.00
-                  </Label>
-                </Header>
-              </Divider>
-              <div className='order__details'>
-                <h2>Order# 123123213213</h2>
-                <Link to='/'>
-                  View Order <Icon className='arrow right' color='green' />
-                </Link>
-              </div>
-              <div className='order__shipping'>
-                <span>
-                  <Label circular color='green' empty key='green' />
-                  Order placed on March 26, 2020
-                </span>
-                <span>
-                  <Label circular color='grey' empty key='gray' /> Preparing for shipment
-                </span>
-              </div>
-              <div className='order__image'>
-                <Image size='tiny' src='https://react.semantic-ui.com/images/avatar/large/stevie.jpg' />
+              <div className='order'>
+                <div className='order__details'>
+                  <h2>Order# 123123213213</h2>
+                  <Link to='/'>
+                    View Order <Icon className='arrow right' color='green' />
+                  </Link>
+                </div>
+                <div className='order__shipping'>
+                  <span>
+                    <Label circular color='green' empty key='green' />
+                    Order placed on March 26, 2020
+                  </span>
+                  <span>
+                    <Label circular color='grey' empty key='gray' /> Preparing for shipment
+                  </span>
+                </div>
+                <div className='order__image'>
+                  <Image size='tiny' src='https://react.semantic-ui.com/images/avatar/large/stevie.jpg' />
+                </div>
               </div>
             </div>
           </div>

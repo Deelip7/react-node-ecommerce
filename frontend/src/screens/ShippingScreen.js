@@ -30,23 +30,19 @@ const ShippingScreen = ({ history }) => {
 
   return (
     <>
-      {address ? (
-        <>
-          <OrderSteps step={'address'} />
-          <FormContainer>
-            <h1>Shipping</h1>
-            <Form onSubmit={(e) => submitHandler(e)}>
-              <Form.Input size='large' label='Address' type='text' placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)} required />
-              <Form.Input size='large' label='City' type='text' placeholder='City' value={city} onChange={(e) => setCity(e.target.value)} required />
-              <Form.Input size='large' label='Postal Code' type='text' placeholder='Postal Code' value={postalCode} onChange={(e) => setPostalCode(e.target.value)} required />
-              <Form.Input size='large' label='Country' type='text' placeholder='Country' value={country} onChange={(e) => setCountry(e.target.value)} required />
-              <Button color='black' type='submit' style={{ width: '100%' }}>
-                Continue
-              </Button>
-            </Form>
-          </FormContainer>
-        </>
-      ) : null}
+      <OrderSteps step={'address'} />
+      <FormContainer>
+        <h1>Shipping</h1>
+        <Form onSubmit={(e) => submitHandler(e)}>
+          <Form.Input size='large' label='Address' type='text' placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)} required />
+          <Form.Input size='large' label='City' type='text' placeholder='City' value={city} onChange={(e) => setCity(e.target.value)} required />
+          <Form.Input size='large' label='Postal Code' type='text' placeholder='Postal Code' value={postalCode} onChange={(e) => setPostalCode(e.target.value)} required />
+          <Form.Input size='large' label='Country' type='text' placeholder='Country' value={country} onChange={(e) => setCountry(e.target.value)} required />
+          <Button color='black' type='submit' style={{ width: '100%' }}>
+            Continue
+          </Button>
+        </Form>
+      </FormContainer>
     </>
   );
 };
