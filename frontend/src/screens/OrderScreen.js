@@ -23,6 +23,18 @@ const OrderScreen = ({ match, history }) => {
     }
   }, [dispatch, match, userInfo, history, order]);
 
+  const priceFormat = (price) => {
+    return (Math.round(price * 100) / 100).toFixed(2);
+  };
+
+  if (!loading) {
+    order.itemsPrice = priceFormat(order.itemsPrice);
+    order.shippingCost = priceFormat(order.shippingCost);
+    order.taxPrice = priceFormat(order.taxPrice);
+    order.orderTotal = priceFormat(order.orderTotal);
+    order.createdAt = order.createdAt.split('T')[0];
+  }
+
   return loading ? (
     <Loader />
   ) : error ? (
@@ -31,24 +43,26 @@ const OrderScreen = ({ match, history }) => {
     <div className='order-container'>
       <div className='order-details'>
         <h2>
-          Thank you. <br />
-          Your order has been placed
+          Thank you! <br />
+          Your order has been placed.
         </h2>
         <h4>Order Information</h4>
         <div>{`Order #: ${order._id}`}</div>
-        <div>{`Order placed on : ${order.createdAt}`}</div>
+        <div>{`Order placed on: ${order.createdAt}`}</div>
         <h4>Shipping Information</h4>
-        <div>{order.user.name}</div>
-        <div>{`${order.shippingAddress.address}, ${order.shippingAddress.city} ${order.shippingAddress.postalCode}, ${order.shippingAddress.country}`}</div>
+        <div>Shipping Address:</div>
+        <div>{order.user.name},</div>
+        <div>{`${order.shippingAddress.address}, ${order.shippingAddress.city} ${order.shippingAddress.postalCode}, ${order.shippingAddress.country}.`}</div>
         <div>
-          Shipping status:
           {order.isDelivered ? (
             <Message success style={style}>
-              Paid
+              <span>Shipping status: </span>
+              <span style={{ fontWeight: '400' }}> Delivered</span>
             </Message>
           ) : (
             <Message style={style} error>
-              Not Delivered
+              <span>Shipping status: </span>
+              <span style={{ fontWeight: '400' }}>Not Delivered</span>
             </Message>
           )}
         </div>
@@ -59,14 +73,15 @@ const OrderScreen = ({ match, history }) => {
           {order.paymentMethod}
         </div>
         <div>
-          Payment status:{' '}
           {order.isPaid ? (
-            <Message success style={style}>
-              Paid
+            <Message style={style} success>
+              <span>Payment status: </span>
+              <span style={{ fontWeight: '400' }}>Paid</span>
             </Message>
           ) : (
             <Message style={style} error>
-              Not Paid
+              <span>Payment status: </span>
+              <span style={{ fontWeight: '400' }}>Not Paid</span>
             </Message>
           )}
         </div>
@@ -108,8 +123,7 @@ const OrderScreen = ({ match, history }) => {
 };
 
 const style = {
-  textAlign: 'center',
-  padding: '7px',
+  padding: '8px ',
   marginTop: '5px',
 };
 export default OrderScreen;
