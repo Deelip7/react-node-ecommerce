@@ -57,13 +57,14 @@ const OrderScreen = ({ match, history }) => {
     return (Math.round(price * 100) / 100).toFixed(2);
   };
 
-  if (!loading) {
+  if (!loading && order) {
     order.itemsPrice = priceFormat(order.itemsPrice);
     order.shippingCost = priceFormat(order.shippingCost);
     order.taxPrice = priceFormat(order.taxPrice);
     order.orderTotal = priceFormat(order.orderTotal);
     order.createdAt = order.createdAt.split('T')[0];
   }
+
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
 
