@@ -8,7 +8,7 @@ const UserOrders = ({ order, loading }) => {
       {loading && <Loader />}
       <div className='order'>
         <div className='order__details'>
-          <h2>{`Order#: ${order._id}`}</h2>
+          <h2>{`Order #: ${order._id}`}</h2>
           <Link to={`/orders/${order._id}`}>
             View Order <Icon className='arrow right' color='green' />
           </Link>

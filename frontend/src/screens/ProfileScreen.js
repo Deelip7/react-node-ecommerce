@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Modal, Divider, Icon, Message } from 'semantic-ui-react';
+import { Button, Modal, Divider, Icon, Message, Image } from 'semantic-ui-react';
 import { getUserOrderList } from '../actions/orderActions';
 import { getUserDetails } from '../actions/userActions';
 import Loader from '../components/Loader';
@@ -70,9 +70,8 @@ const ProfileScreen = ({ history }) => {
             <div className='order-Container'>
               <div>
                 <h1>Orders</h1>
-                <p>2 Items</p>
+                <p>{orders ? (orders.length > 1 ? `${orders.length} orders` : `${orders.length} order`) : null}</p>
                 <Divider />
-
                 {orders && orders.map((order) => <UserOrders order={order} key={order._id} loading={orderLoading} />)}
               </div>
             </div>
