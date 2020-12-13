@@ -27,10 +27,11 @@ main {
 
 button,
 .ui.input > input,
-.ui.dropdown .menu {
-  border-radius: 0 !important;
-}
-.ui.message {
+.ui.dropdown .menu,
+.ui.steps,
+.ui.message,
+.ui.table,
+.ui.steps .step {
   border-radius: 0 !important;
 }
 
@@ -52,15 +53,11 @@ button,
   font-size: 1.1rem !important;
 }
 
-.ui.steps {
-  border-radius: 0 !important;
-}
 .ui.steps .step.active {
   background-color: #f3f3f3 !important;
 }
 .ui.steps .step {
   padding: 0.8rem 1rem !important;
-  border-radius: 0 !important;
 }
 .ui.steps .step.active .title {
   color: #414141 !important;

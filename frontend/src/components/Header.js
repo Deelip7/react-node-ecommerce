@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dropdown, Label, Menu } from 'semantic-ui-react';
+import { Divider, Dropdown, Label, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
@@ -25,7 +25,7 @@ const Header = ({ location }) => {
     }
   };
 
-  const options = userInfo
+  const options = userInfo.isAdmin
     ? [
         {
           key: 'user',
@@ -36,6 +36,13 @@ const Header = ({ location }) => {
           ),
           disabled: true,
         },
+        { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
+        { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
+        { key: 'User List', text: 'User List', to: '/admin/userlist', as: Link, disabled: false, selected: false },
+        { key: 'sign-out', text: 'Sign Out', value: 'logout' },
+      ]
+    : userInfo
+    ? [
         { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
         { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
         { key: 'sign-out', text: 'Sign Out', value: 'logout' },
