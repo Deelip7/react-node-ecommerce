@@ -8,6 +8,9 @@
   h1,
   h2 {
     font-weight: normal;
+  }
+
+  h2 {
     font-size: 1.2rem;
   }
   .user {
@@ -51,10 +54,12 @@
           justify-content: space-around;
           min-width: 200px;
         }
-
-        @media screen and (max-width: 350px) {
+      }
+      @media screen and (max-width: 350px) {
+        padding: 0 1rem;
+        .order {
           gap: 2rem;
-          padding: 0 0.5rem;
+          padding: 0;
         }
       }
     }

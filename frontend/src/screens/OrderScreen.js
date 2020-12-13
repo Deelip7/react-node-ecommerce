@@ -78,10 +78,18 @@ const OrderScreen = ({ match, history }) => {
   ) : (
     <div className='order-container'>
       <div className='order-details'>
-        <h2>
-          Thank you! <br />
-          Your order has been placed.
-        </h2>
+        {order.isPaid ? (
+          <h2>
+            Thank you! <br />
+            Your order has been placed.
+          </h2>
+        ) : (
+          <h2>
+            Thank you! <br />
+            Your order has been received.
+          </h2>
+        )}
+
         <h4>Order Information</h4>
         <div>{`Order #: ${order._id}`}</div>
         <div>{`Order placed on: ${order.createdAt}`}</div>
@@ -165,7 +173,7 @@ const OrderScreen = ({ match, history }) => {
 };
 
 const style = {
-  padding: '8px ',
-  marginTop: '5px',
+  padding: '10px',
+  marginTop: '7px',
 };
 export default OrderScreen;

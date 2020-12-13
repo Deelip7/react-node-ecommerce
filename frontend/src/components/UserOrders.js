@@ -1,13 +1,14 @@
 import React from 'react';
-import { Image, Label, Icon, Divider } from 'semantic-ui-react';
+import { Image, Label, Icon, Divider, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-const UserOrders = ({ order }) => {
+const UserOrders = ({ order, loading }) => {
   return (
     <>
+      {loading && <Loader />}
       <div className='order'>
         <div className='order__details'>
-          <h2>{`Order# ${order._id}`}</h2>
+          <h2>{`Order#: ${order._id}`}</h2>
           <Link to={`/orders/${order._id}`}>
             View Order <Icon className='arrow right' color='green' />
           </Link>

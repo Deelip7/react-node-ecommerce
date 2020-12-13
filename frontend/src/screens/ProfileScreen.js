@@ -6,6 +6,7 @@ import { getUserDetails } from '../actions/userActions';
 import Loader from '../components/Loader';
 import ProfileEdit from '../components/ProfileEdit';
 import UserOrders from '../components/UserOrders';
+import { ORDER_LIST_RESET } from '../constants/orderConstants';
 import { USER_UPDATE_RESET } from '../constants/userContants';
 
 const ProfileScreen = ({ history }) => {
@@ -27,6 +28,8 @@ const ProfileScreen = ({ history }) => {
       if (!user.name) {
         dispatch({ type: USER_UPDATE_RESET });
         dispatch(getUserDetails('profile'));
+      } else if (orderList) {
+        dispatch({ type: ORDER_LIST_RESET });
         dispatch(getUserOrderList());
       }
     }
@@ -70,7 +73,7 @@ const ProfileScreen = ({ history }) => {
                 <p>2 Items</p>
                 <Divider />
 
-                {orders && orders.map((order) => <UserOrders order={order} key={order._id} />)}
+                {orders && orders.map((order) => <UserOrders order={order} key={order._id} loading={orderLoading} />)}
               </div>
             </div>
           </div>
