@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Divider, Dropdown, Label, Menu } from 'semantic-ui-react';
+import { Divider, Dropdown, Input, Label, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
@@ -13,44 +13,11 @@ const Header = ({ location }) => {
 
   const cartItemsNum = String(cartItems.reduce((a, { qty }) => a + qty, 0));
 
-  const trigger = (
-    <span>
-      <img src='/images/icons/user.svg' alt='' className='ui avatar image' />
-    </span>
-  );
-
   const logoutHandler = (e, { value }) => {
     if (value === 'logout') {
       dispatch(logout());
     }
   };
-
-  const options = userInfo.isAdmin
-    ? [
-        {
-          key: 'user',
-          text: (
-            <span>
-              Signed in as <strong>{userInfo.name.split(' ')[1] || userInfo.name}</strong>
-            </span>
-          ),
-          disabled: true,
-        },
-        { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
-        { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
-        { key: 'User List', text: 'User List', to: '/admin/userlist', as: Link, disabled: false, selected: false },
-        { key: 'sign-out', text: 'Sign Out', value: 'logout' },
-      ]
-    : userInfo
-    ? [
-        { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
-        { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
-        { key: 'sign-out', text: 'Sign Out', value: 'logout' },
-      ]
-    : [
-        { key: 'sign-in', text: 'Sign In', to: '/login', as: Link, disabled: false, selected: false },
-        { key: 'register', text: 'Register', to: '/register', as: Link, disabled: false },
-      ];
 
   return (
     <header>
@@ -85,7 +52,26 @@ const Header = ({ location }) => {
           </Menu>
         </div>
         <div className='nav__dropdown'>
-          <Dropdown trigger={trigger} options={options} direction='left' icon='' onChange={logoutHandler} />
+          <Menu>
+            {/* <span>
+              <img src='/images/icons/user.svg' alt='' className='ui avatar image' />
+            </span> */}
+            <Dropdown icon='user' direction='left' className='link item' fitted size='big'>
+              <Dropdown.Menu>
+                <Dropdown.Header>
+                  Signed in as <strong>{userInfo.name.split(' ')[1] || userInfo.name}</strong>
+                </Dropdown.Header>
+                <Dropdown.Item>Your Profile</Dropdown.Item>
+                <Dropdown.Item>Your Stars</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Header>Admin Settings</Dropdown.Header>
+                <Dropdown.Item>User List</Dropdown.Item>
+                <Dropdown.Item>Product List</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item>Sign Out</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu>
         </div>
       </div>
     </header>

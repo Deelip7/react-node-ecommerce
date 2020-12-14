@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Table } from 'semantic-ui-react';
+import { Button, Loader, Message, Table } from 'semantic-ui-react';
 import { getUserList } from '../actions/userActions';
 
 const AdminUserListScreen = () => {
@@ -8,7 +8,6 @@ const AdminUserListScreen = () => {
 
   const userList = useSelector((state) => state.userList);
   const { loading, users, error } = userList;
-  console.log(users);
 
   useEffect(() => {
     dispatch(getUserList());
@@ -16,6 +15,8 @@ const AdminUserListScreen = () => {
 
   return (
     <div>
+      {loading && <Loader />}
+      {error && <Message error list={error} />}
       {users && (
         <Table compact celled style={{ maxWidth: '80%', margin: '5rem auto 0' }}>
           <Table.Header>

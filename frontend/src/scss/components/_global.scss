@@ -38,7 +38,7 @@ button,
 .ui.form .field > label,
 .ui.divider {
   font-weight: 400 !important;
-  text-transform: uppercase !important;
+  // text-transform: uppercase !important;
   font-size: 1.2rem !important;
 }
 .ui.button {
@@ -75,6 +75,18 @@ button,
 .ui.ordered.steps .step::before {
   font-size: 1.5em !important;
   font-weight: 100 !important;
+}
+
+// .ui.divider {
+//   margin: 1.5rem 0 !important;
+// }
+
+.ui.dropdown .menu > .divider {
+  margin: 0 0 1rem !important;
+}
+.ui.form .field > label,
+.ui.divider {
+  font-size: 1rem !important;
 }
 
 @media screen and (max-width: 768px) {
