@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Divider, Dropdown, Input, Label, Menu } from 'semantic-ui-react';
+import { Dropdown, Label, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
@@ -114,48 +114,3 @@ const Header = ({ location }) => {
 };
 
 export default Header;
-
-// const options =
-//   userInfo && userInfo.isAdmin
-//     ? [
-//         {
-//           key: 'user',
-//           text: (
-//             <span>
-//               Signed in as <strong>{userInfo.name.split(' ')[1] || userInfo.name}</strong>
-//             </span>
-//           ),
-//           disabled: true,
-//         },
-//         { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
-//         { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
-//         { key: 'User List', text: 'User List', to: '/admin/userlist', as: Link, disabled: false, selected: false },
-//         { as: Divider },
-//         { key: 'sign-out', text: 'Sign Out', value: 'logout' },
-//       ]
-//     : userInfo
-//     ? [
-//         { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
-//         { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
-//         { key: 'sign-out', text: 'Sign Out', value: 'logout' },
-//       ]
-//     : [
-//         { key: 'sign-in', text: 'Sign In', to: '/login', as: Link, disabled: false, selected: false },
-//         { key: 'register', text: 'Register', to: '/register', as: Link, disabled: false },
-//       ];
-
-// const tagOptions = [
-//   {
-//     key: 'user',
-//     text: (
-//       <span>
-//         Signed in as <strong>{userInfo.name.split(' ')[1] || userInfo.name}</strong>
-//       </span>
-//     ),
-//     disabled: true,
-//   },
-//   { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
-//   { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
-//   { key: 'User List', text: 'User List', to: '/admin/userlist', as: Link, disabled: false, selected: false },
-//   { key: 'sign-out', text: 'Sign Out', value: 'logout' },
-// ];

@@ -2,16 +2,25 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Loader, Message, Table } from 'semantic-ui-react';
 import { getUserList } from '../actions/userActions';
+import { USER_LIST_RESET } from '../constants/userContants';
 
-const AdminUserListScreen = () => {
+const AdminUserListScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const userList = useSelector((state) => state.userList);
   const { loading, users, error } = userList;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
-    dispatch(getUserList());
-  }, [dispatch]);
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(getUserList());
+    } else {
+      dispatch({ type: USER_LIST_RESET });
+      history.push('/login');
+    }
+  }, [dispatch, history, userInfo]);
 
   return (
     <div>

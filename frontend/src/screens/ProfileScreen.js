@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Modal, Divider, Icon, Message, Image } from 'semantic-ui-react';
+import { Button, Modal, Divider, Icon, Message } from 'semantic-ui-react';
 import { getUserOrderList } from '../actions/orderActions';
 import { getUserDetails } from '../actions/userActions';
 import Loader from '../components/Loader';
