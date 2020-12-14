@@ -115,3 +115,7 @@ button,
 .ui.menu .ui.dropdown .menu > .item {
   cursor: pointer;
 }
+
+.ui.dropdown .menu > .divider {
+  margin: 0 !important;
+}

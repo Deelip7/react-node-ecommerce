@@ -96,6 +96,7 @@ const Header = ({ location }) => {
                 </Dropdown.Menu>
               ) : (
                 <Dropdown.Menu>
+                  <Dropdown.Header>Welcome to Rn Store</Dropdown.Header>
                   <Dropdown.Item as={Link} to='/login'>
                     Sign In
                   </Dropdown.Item>
