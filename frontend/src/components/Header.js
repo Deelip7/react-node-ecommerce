@@ -13,14 +13,18 @@ const Header = ({ location }) => {
 
   const cartItemsNum = String(cartItems.reduce((a, { qty }) => a + qty, 0));
 
-  const logoutHandler = (e, { value }) => {
-    if (value === 'logout') {
-      dispatch(logout());
-    }
+  const trigger = (
+    <>
+      <img src='/images/icons/user.svg' alt='' className='ui avatar image' />
+    </>
+  );
+
+  const logoutHandler = () => {
+    dispatch(logout());
   };
 
   return (
-    <header>
+    <div className='nav-header'>
       <div className='nav'>
         <div className='nav__logo'>
           <Link to='/'>
@@ -53,29 +57,104 @@ const Header = ({ location }) => {
         </div>
         <div className='nav__dropdown'>
           <Menu>
-            {/* <span>
-              <img src='/images/icons/user.svg' alt='' className='ui avatar image' />
-            </span> */}
-            <Dropdown icon='user' direction='left' className='link item' fitted size='big'>
-              <Dropdown.Menu>
-                <Dropdown.Header>
-                  Signed in as <strong>{userInfo.name.split(' ')[1] || userInfo.name}</strong>
-                </Dropdown.Header>
-                <Dropdown.Item>Your Profile</Dropdown.Item>
-                <Dropdown.Item>Your Stars</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Header>Admin Settings</Dropdown.Header>
-                <Dropdown.Item>User List</Dropdown.Item>
-                <Dropdown.Item>Product List</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item>Sign Out</Dropdown.Item>
-              </Dropdown.Menu>
+            <Dropdown trigger={trigger} direction='left' icon='' onChange={logoutHandler}>
+              {userInfo && userInfo.isAdmin ? (
+                <Dropdown.Menu>
+                  <Dropdown.Header>
+                    Signed in as <strong>{userInfo.name.split(' ')[1] || userInfo.name}</strong>
+                  </Dropdown.Header>
+                  <Dropdown.Item as={Link} to='/profile'>
+                    Your Profile
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to='/profile'>
+                    Your Stars
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Header>Admin Settings</Dropdown.Header>
+                  <Dropdown.Item as={Link} to='/admin/userlist'>
+                    User List
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to='/admin/userlist'>
+                    Product List
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={logoutHandler}>Sign Out</Dropdown.Item>
+                </Dropdown.Menu>
+              ) : userInfo ? (
+                <Dropdown.Menu>
+                  <Dropdown.Header>
+                    Signed in as <strong>{userInfo.name.split(' ')[1] || userInfo.name}</strong>
+                  </Dropdown.Header>
+                  <Dropdown.Item as={Link} to='/profile'>
+                    Your Profile
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to='/profile'>
+                    Your Stars
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={logoutHandler}>Sign Out</Dropdown.Item>
+                </Dropdown.Menu>
+              ) : (
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to='/login'>
+                    Sign In
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to='/register'>
+                    Register
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              )}
             </Dropdown>
           </Menu>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 
 export default Header;
+
+// const options =
+//   userInfo && userInfo.isAdmin
+//     ? [
+//         {
+//           key: 'user',
+//           text: (
+//             <span>
+//               Signed in as <strong>{userInfo.name.split(' ')[1] || userInfo.name}</strong>
+//             </span>
+//           ),
+//           disabled: true,
+//         },
+//         { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
+//         { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
+//         { key: 'User List', text: 'User List', to: '/admin/userlist', as: Link, disabled: false, selected: false },
+//         { as: Divider },
+//         { key: 'sign-out', text: 'Sign Out', value: 'logout' },
+//       ]
+//     : userInfo
+//     ? [
+//         { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
+//         { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
+//         { key: 'sign-out', text: 'Sign Out', value: 'logout' },
+//       ]
+//     : [
+//         { key: 'sign-in', text: 'Sign In', to: '/login', as: Link, disabled: false, selected: false },
+//         { key: 'register', text: 'Register', to: '/register', as: Link, disabled: false },
+//       ];
+
+// const tagOptions = [
+//   {
+//     key: 'user',
+//     text: (
+//       <span>
+//         Signed in as <strong>{userInfo.name.split(' ')[1] || userInfo.name}</strong>
+//       </span>
+//     ),
+//     disabled: true,
+//   },
+//   { key: 'profile', text: 'Your Profile', to: '/profile', as: Link, selected: false },
+//   { key: 'stars', text: 'Your Stars', to: '/profile', as: Link },
+//   { key: 'User List', text: 'User List', to: '/admin/userlist', as: Link, disabled: false, selected: false },
+//   { key: 'sign-out', text: 'Sign Out', value: 'logout' },
+// ];
