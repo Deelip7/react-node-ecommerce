@@ -113,6 +113,14 @@ const getUsers = asyncHandler(async (req, res) => {
   res.json(users);
 });
 
+// @desc Get  user by id
+// @route GET /api/user/:id
+// @acess Private/Admin
+const getUsersById = asyncHandler(async (req, res) => {
+  const users = await User.findById(req.params.id).select('-password');
+  res.json(users);
+});
+
 // @desc Delete a user
 // @route DELETE /api/users/:id
 // @acess Private/Admin
@@ -152,4 +160,4 @@ const updateUserbyAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserprofile, registerUser, updateUserprofile, getUsers, deleteUser, updateUserbyAdmin };
+export { authUser, getUserprofile, registerUser, updateUserprofile, getUsers, deleteUser, updateUserbyAdmin, getUsersById };

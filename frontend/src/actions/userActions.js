@@ -154,3 +154,59 @@ export const getUserList = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const getUserbyId = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: actions.USER_BYID_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/users/${id}`, config);
+
+    dispatch({
+      type: actions.USER_BYID_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: actions.USER_BYID_FAIL,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};
+
+export const deleteUserbyId = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: actions.USER_DELETE_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.delete(`/api/users/${id}`, config);
+
+    dispatch({
+      type: actions.USER_DELETE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: actions.USER_DELETE_FAIL,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};

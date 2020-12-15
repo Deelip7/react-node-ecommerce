@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Loader, Message, Table } from 'semantic-ui-react';
-import { getUserList } from '../actions/userActions';
+import { Button, Icon, Loader, Message, Modal, Table } from 'semantic-ui-react';
+import { deleteUserbyId, getUserList } from '../actions/userActions';
+import AdminProfileEdit from '../components/AdminProfileEdit';
 import { USER_LIST_RESET } from '../constants/userContants';
 
 const AdminUserListScreen = ({ history }) => {
@@ -22,6 +23,11 @@ const AdminUserListScreen = ({ history }) => {
     }
   }, [dispatch, history, userInfo]);
 
+  const deleteUserHandler = (e, { value }) => {
+    dispatch(deleteUserbyId(value));
+    dispatch(getUserList());
+  };
+
   return (
     <div>
       {loading && <Loader />}
@@ -34,7 +40,7 @@ const AdminUserListScreen = ({ history }) => {
               <Table.HeaderCell>Registration Date</Table.HeaderCell>
               <Table.HeaderCell>E-mail address</Table.HeaderCell>
               <Table.HeaderCell>Admin User</Table.HeaderCell>
-              <Table.HeaderCell>Edit</Table.HeaderCell>
+              <Table.HeaderCell></Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -46,8 +52,27 @@ const AdminUserListScreen = ({ history }) => {
                     <Table.Cell>{user.email}</Table.Cell>
                     <Table.Cell>{user.isAdmin ? 'Yes' : 'No'}</Table.Cell>
                     <Table.Cell collapsing>
-                      <Button size='large' basic icon='edit outline' />
-                      <Button size='large' basic color='red' icon='user delete' />
+                      <Modal
+                        defaultOpen={false}
+                        closeIcon
+                        trigger={
+                          <Button animated basic>
+                            <Button.Content hidden>Edit</Button.Content>
+                            <Button.Content visible>
+                              <Icon name='edit outline' />
+                            </Button.Content>
+                          </Button>
+                        }
+                        content={<AdminProfileEdit userId={user._id} />}
+                        actions={[{ key: 'save', content: 'Save', positive: true }]}
+                      />
+                      {/* <Button icon='user delete' onClick={deleteUserHandler} value={user._id}></Button> */}
+                      <Button animated basic color='red' onClick={deleteUserHandler} value={user._id}>
+                        <Button.Content hidden>Delete</Button.Content>
+                        <Button.Content visible>
+                          <Icon name='user delete' />
+                        </Button.Content>
+                      </Button>
                     </Table.Cell>
                   </Table.Row>
                 ))

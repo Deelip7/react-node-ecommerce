@@ -113,4 +113,50 @@ const userListReducer = (state = { userList: [] }, action) => {
   }
 };
 
-export { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateReducer, userListReducer };
+const userDetailsByIdReducer = (state = { loading: true, userById: {} }, action) => {
+  switch (action.type) {
+    case actions.USER_BYID_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actions.USER_BYID_SUCCESS:
+      return {
+        loading: false,
+        userById: action.payload,
+      };
+    case actions.USER_BYID_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case actions.USER_BYID_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+const userDeleteByIdReducer = (state = {}, action) => {
+  switch (action.type) {
+    case actions.USER_DELETE_REQUEST:
+      return {
+        loading: true,
+      };
+    case actions.USER_DELETE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case actions.USER_DELETE_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateReducer, userListReducer, userDetailsByIdReducer, userDeleteByIdReducer };
