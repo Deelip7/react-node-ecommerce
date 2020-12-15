@@ -143,8 +143,8 @@ const updateUserbyAdmin = asyncHandler(async (req, res) => {
 
   if (user) {
     user.name = req.body.name || user.name;
-    user.isAdmin = req.body.isAdmin || user.isAdmin;
-    user.email = req.body.email;
+    user.email = req.body.email || user.email;
+    user.isAdmin = req.body.isAdmin;
 
     const updatedUser = await user.save();
 
