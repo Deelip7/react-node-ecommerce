@@ -7,7 +7,7 @@ import Loader from '../components/Loader';
 import ProfileEdit from '../components/ProfileEdit';
 import UserOrders from '../components/UserOrders';
 import { ORDER_LIST_RESET } from '../constants/orderConstants';
-import { USER_UPDATE_RESET } from '../constants/userContants';
+import { USER_UPDATE_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ history }) => {
   const dispatch = useDispatch();

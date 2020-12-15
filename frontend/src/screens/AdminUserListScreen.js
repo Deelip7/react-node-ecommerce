@@ -1,31 +1,32 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Icon, Loader, Message, Modal, Table } from 'semantic-ui-react';
-import { deleteUserbyId, getUserList } from '../actions/userActions';
-import AdminProfileEdit from '../components/AdminProfileEdit';
-import { USER_LIST_RESET } from '../constants/userContants';
+import { Button, Icon, Message, Popup, Table } from 'semantic-ui-react';
+import { adminUserDelete, adminUsersList } from '../actions/adminActions';
+import { ADMIN_UPDATE_USER_RESET } from '../constants/adminConstants';
+import Loader from '../components/Loader';
+import { Link } from 'react-router-dom';
 
 const AdminUserListScreen = ({ history }) => {
   const dispatch = useDispatch();
 
-  const userList = useSelector((state) => state.userList);
-  const { loading, users, error } = userList;
+  const adminListUsers = useSelector((state) => state.adminListUsers);
+  const { loading, users, error } = adminListUsers;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(getUserList());
+      dispatch(adminUsersList());
     } else {
-      dispatch({ type: USER_LIST_RESET });
+      dispatch({ type: ADMIN_UPDATE_USER_RESET });
       history.push('/login');
     }
   }, [dispatch, history, userInfo]);
 
   const deleteUserHandler = (e, { value }) => {
-    dispatch(deleteUserbyId(value));
-    dispatch(getUserList());
+    dispatch(adminUserDelete(value));
+    dispatch(adminUsersList());
   };
 
   return (
@@ -52,27 +53,26 @@ const AdminUserListScreen = ({ history }) => {
                     <Table.Cell>{user.email}</Table.Cell>
                     <Table.Cell>{user.isAdmin ? 'Yes' : 'No'}</Table.Cell>
                     <Table.Cell collapsing>
-                      <Modal
-                        defaultOpen={false}
-                        closeIcon
+                      <Button animated basic to={`/admin/user/${user._id}`} as={Link}>
+                        <Button.Content hidden>Edit</Button.Content>
+                        <Button.Content visible>
+                          <Icon name='edit outline' />
+                        </Button.Content>
+                      </Button>
+                      <Popup
+                        hideOnScroll
                         trigger={
-                          <Button animated basic>
-                            <Button.Content hidden>Edit</Button.Content>
+                          <Button animated basic color='red'>
+                            <Button.Content hidden>Delete</Button.Content>
                             <Button.Content visible>
-                              <Icon name='edit outline' />
+                              <Icon name='user delete' />
                             </Button.Content>
                           </Button>
                         }
-                        content={<AdminProfileEdit userId={user._id} />}
-                        actions={[{ key: 'save', content: 'Save', positive: true }]}
+                        content={<Button color='green' content='Confirm Deletion' onClick={deleteUserHandler} value={user._id} />}
+                        on='click'
+                        position='top right'
                       />
-                      {/* <Button icon='user delete' onClick={deleteUserHandler} value={user._id}></Button> */}
-                      <Button animated basic color='red' onClick={deleteUserHandler} value={user._id}>
-                        <Button.Content hidden>Delete</Button.Content>
-                        <Button.Content visible>
-                          <Icon name='user delete' />
-                        </Button.Content>
-                      </Button>
                     </Table.Cell>
                   </Table.Row>
                 ))
