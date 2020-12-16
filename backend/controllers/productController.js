@@ -70,4 +70,21 @@ const deleteProductById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById, updateProductById, deleteProductById };
+// @desc create a product
+// @route Delete /api/products/:id
+// @acess Private
+const createProduct = asyncHandler(async (req, res) => {
+  const product = req.body;
+  console.log(product);
+
+  if (product) {
+    res.json({
+      product,
+    });
+  } else {
+    res.status(404);
+    throw new Error('Product not found');
+  }
+});
+
+export { getProducts, getProductById, updateProductById, deleteProductById, createProduct };

@@ -74,7 +74,7 @@ const Header = ({ location }) => {
                   <Dropdown.Item as={Link} to='/admin/userlist'>
                     User List
                   </Dropdown.Item>
-                  <Dropdown.Item as={Link} to='/admin/userlist'>
+                  <Dropdown.Item as={Link} to='/admin/productlist'>
                     Product List
                   </Dropdown.Item>
                   <Dropdown.Divider />

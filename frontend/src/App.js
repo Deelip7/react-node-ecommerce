@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Page404 from './components/Page404';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
@@ -14,7 +15,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import AdminUserListScreen from './screens/AdminUserListScreen';
 import AdminUserEditScreen from './screens/AdminUserEditScreen';
-import Page404 from './components/Page404';
+import AdminProductListScreen from './screens/AdminProductListScreen';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             <Route path='/register' component={RegisterScreen} />
             <Route path='/admin/userlist' component={AdminUserListScreen} />
             <Route path='/admin/user/:id' component={AdminUserEditScreen} />
+            <Route path='/admin/productlist' component={AdminProductListScreen} />
             <Route path='/product/:id' component={ProductScreen} />
             <Route path='/cart/:id?' component={CartScreen} />
             <Route exact path='/' component={HomeScreen} />
