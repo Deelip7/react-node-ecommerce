@@ -89,3 +89,26 @@ export const adminDeleteProductReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const adminUpdateProductReducer = (state = { product: {} }, action) => {
+  switch (action.type) {
+    case actions.ADMIN_UPDATE_PRODUCT_REQUEST:
+      return {
+        loading: true,
+      };
+    case actions.ADMIN_UPDATE_PRODUCT_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case actions.ADMIN_UPDATE_PRODUCT_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case actions.ADMIN_UPDATE_PRODUCT_RESET:
+      return { product: {} };
+    default:
+      return state;
+  }
+};

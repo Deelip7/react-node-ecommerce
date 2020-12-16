@@ -46,7 +46,7 @@ const Header = ({ location }) => {
                 <img src='/images/icons/cart.svg' alt='' />
               </Link>
               {cartItemsNum !== '0' ? (
-                <Label color='orange' circular floating>
+                <Label color='orange' circular floating className='cart-lable'>
                   {cartItemsNum}
                 </Label>
               ) : (

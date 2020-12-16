@@ -68,7 +68,10 @@ const AdminProductListScreen = ({ history }) => {
                         <Button animated basic color='red'>
                           <Button.Content hidden>Delete</Button.Content>
                           <Button.Content visible>
-                            <Icon name='user delete' />
+                            <Icon.Group>
+                              <Icon name='shopping basket' />
+                              <Icon corner='bottom right' name='x' />
+                            </Icon.Group>
                           </Button.Content>
                         </Button>
                       }

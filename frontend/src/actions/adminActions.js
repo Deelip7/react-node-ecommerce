@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as actions from '../constants/adminConstants';
 import { USER_DETAILS_SUCCESS, USER_DETAILS_RESET } from '../constants/userConstants';
+import { PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_RESET } from '../constants/productConstants';
 
 export const adminUsersList = () => async (dispatch, getState) => {
   try {
@@ -86,6 +87,38 @@ export const adminUserDelete = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: actions.ADMIN_DELETE_USER_FAIL,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};
+
+export const adminProductUpdate = (product) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: actions.ADMIN_UPDATE_PRODUCT_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(`/api/products/${product._id}`, product, config);
+
+    dispatch({ type: actions.ADMIN_UPDATE_PRODUCT_SUCCESS });
+
+    dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+
+    dispatch({ type: PRODUCT_DETAILS_RESET });
+  } catch (error) {
+    dispatch({
+      type: actions.ADMIN_UPDATE_PRODUCT_FAIL,
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }

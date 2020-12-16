@@ -57,6 +57,9 @@
       img {
         width: 2.19rem;
       }
+      .ui.menu .item > .label {
+        border-radius: 500rem !important;
+      }
     }
 
     &__dropdown {
