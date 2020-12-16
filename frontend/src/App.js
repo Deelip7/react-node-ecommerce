@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
@@ -14,6 +14,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import AdminUserListScreen from './screens/AdminUserListScreen';
 import AdminUserEditScreen from './screens/AdminUserEditScreen';
+import Page404 from './components/Page404';
 
 const App = () => {
   return (
@@ -21,18 +22,21 @@ const App = () => {
       <div className='App'>
         <Header />
         <main>
-          <Route path='/orders/:id' component={OrderScreen} />
-          <Route path='/placeorder' component={PlaceOrderScreen} />
-          <Route path='/payment' component={PaymentScreen} />
-          <Route path='/shipping' component={ShippingScreen} />
-          <Route path='/profile' component={ProfileScreen} />
-          <Route path='/login' component={LoginScreen} />
-          <Route path='/register' component={RegisterScreen} />
-          <Route path='/admin/userlist' component={AdminUserListScreen} />
-          <Route path='/admin/user/:id' component={AdminUserEditScreen} />
-          <Route path='/product/:id' component={ProductScreen} />
-          <Route path='/cart/:id?' component={CartScreen} />
-          <Route path='/' component={HomeScreen} exact />
+          <Switch>
+            <Route path='/orders/:id' component={OrderScreen} />
+            <Route path='/placeorder' component={PlaceOrderScreen} />
+            <Route path='/payment' component={PaymentScreen} />
+            <Route path='/shipping' component={ShippingScreen} />
+            <Route path='/profile' component={ProfileScreen} />
+            <Route path='/login' component={LoginScreen} />
+            <Route path='/register' component={RegisterScreen} />
+            <Route path='/admin/userlist' component={AdminUserListScreen} />
+            <Route path='/admin/user/:id' component={AdminUserEditScreen} />
+            <Route path='/product/:id' component={ProductScreen} />
+            <Route path='/cart/:id?' component={CartScreen} />
+            <Route exact path='/' component={HomeScreen} />
+            <Route path='/' component={Page404} />
+          </Switch>
         </main>
         <Footer />
       </div>
