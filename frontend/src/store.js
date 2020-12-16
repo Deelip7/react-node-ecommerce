@@ -4,7 +4,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { productListReducer, productDetailsReducer } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateReducer } from './reducers/userReducers';
-import { adminListUsersReducer, adminUpdateUserReducer, adminDeleteUserReducer } from './reducers/adminReducers';
+import { adminListUsersReducer, adminUpdateUserReducer, adminDeleteUserReducer, adminDeleteProductReducer } from './reducers/adminReducers';
 import { orderCreateReducer, orderDetailsReducer, orderPayReducer, orderListReducer } from './reducers/orderReducers';
 
 const reducer = combineReducers({
@@ -16,6 +16,7 @@ const reducer = combineReducers({
   adminListUsers: adminListUsersReducer,
   adminUpdateUser: adminUpdateUserReducer,
   adminDeleteUser: adminDeleteUserReducer,
+  adminDeleteProduct: adminDeleteProductReducer,
 
   productList: productListReducer,
   productDetails: productDetailsReducer,

@@ -39,6 +39,8 @@ const productDetailsReducer = (state = { product: { reviews: [] } }, action) => 
         loading: false,
         error: action.payload,
       };
+    case actions.PRODUCT_LIST_RESET:
+      return {};
     default:
       return state;
   }

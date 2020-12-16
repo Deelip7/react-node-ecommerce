@@ -4,6 +4,8 @@ import { Button, Icon, Message, Popup, Table } from 'semantic-ui-react';
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
+import { adminProductDelete } from '../actions/adminActions';
+import { PRODUCT_LIST_RESET } from '../constants/productConstants';
 
 const AdminProductListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -11,9 +13,24 @@ const AdminProductListScreen = ({ history }) => {
   const productList = useSelector((state) => state.productList);
   const { loading, products, error } = productList;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const adminDeleteProduct = useSelector((state) => state.adminDeleteProduct);
+  const { success } = adminDeleteProduct;
+
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listProducts());
+    } else {
+      dispatch({ type: PRODUCT_LIST_RESET });
+      history.push('/login');
+    }
+  }, [dispatch, history, userInfo, success]);
+
+  const deleteProductHandler = (e, { value }) => {
+    dispatch(adminProductDelete(value));
+  };
 
   return (
     <div>
@@ -25,7 +42,7 @@ const AdminProductListScreen = ({ history }) => {
             <Table.Row>
               <Table.HeaderCell>Name</Table.HeaderCell>
               <Table.HeaderCell>Price</Table.HeaderCell>
-              <Table.HeaderCell>Num In Stock</Table.HeaderCell>
+              <Table.HeaderCell># In Stock</Table.HeaderCell>
               <Table.HeaderCell>Rating</Table.HeaderCell>
               <Table.HeaderCell></Table.HeaderCell>
             </Table.Row>
@@ -39,8 +56,7 @@ const AdminProductListScreen = ({ history }) => {
                   <Table.Cell>{product.numInStock}</Table.Cell>
                   <Table.Cell>{product.rating}</Table.Cell>
                   <Table.Cell collapsing>
-                    {/* <Button animated basic to={`/admin/user/${user._id}`} as={Link}> */}
-                    <Button animated basic as={Link}>
+                    <Button animated basic to={`/admin/product/${product._id}`} as={Link}>
                       <Button.Content hidden>Edit</Button.Content>
                       <Button.Content visible>
                         <Icon name='edit outline' />
@@ -56,7 +72,7 @@ const AdminProductListScreen = ({ history }) => {
                           </Button.Content>
                         </Button>
                       }
-                      content={<Button color='green' content='Confirm Deletion' />}
+                      content={<Button color='green' content='Confirm Deletion' onClick={deleteProductHandler} value={product._id} />}
                       on='click'
                       position='top right'
                     />

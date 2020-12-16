@@ -90,3 +90,31 @@ export const adminUserDelete = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+export const adminProductDelete = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: actions.ADMIN_DELETE_PRODUCT_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.delete(`/api/products/${id}`, config);
+
+    dispatch({
+      type: actions.ADMIN_DELETE_PRODUCT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: actions.ADMIN_DELETE_PRODUCT_FAIL,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};

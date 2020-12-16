@@ -67,3 +67,25 @@ export const adminDeleteUserReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const adminDeleteProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case actions.ADMIN_DELETE_PRODUCT_REQUEST:
+      return {
+        loading: true,
+      };
+    case actions.ADMIN_DELETE_PRODUCT_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case actions.ADMIN_DELETE_PRODUCT_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};

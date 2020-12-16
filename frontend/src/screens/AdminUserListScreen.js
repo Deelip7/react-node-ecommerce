@@ -15,6 +15,9 @@ const AdminUserListScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const adminDeleteUser = useSelector((state) => state.adminDeleteUser);
+  const { success } = adminDeleteUser;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(adminUsersList());
@@ -22,11 +25,10 @@ const AdminUserListScreen = ({ history }) => {
       dispatch({ type: ADMIN_UPDATE_USER_RESET });
       history.push('/login');
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, success]);
 
   const deleteUserHandler = (e, { value }) => {
     dispatch(adminUserDelete(value));
-    dispatch(adminUsersList());
   };
 
   return (
