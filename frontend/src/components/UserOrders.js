@@ -29,7 +29,7 @@ const UserOrders = ({ order, loading }) => {
           {order.isDelivered ? (
             <span>
               <Label circular color='green' empty key='green' />
-              {`Order delivered on ${order.isDelivered.split('T')[0]}`}
+              {`Delivered on ${order.deliveredAt.split('T')[0]}`}
             </span>
           ) : !order.paidAt ? (
             <span>

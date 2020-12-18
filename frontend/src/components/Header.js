@@ -77,6 +77,9 @@ const Header = ({ location }) => {
                   <Dropdown.Item as={Link} to='/admin/productlist'>
                     Product List
                   </Dropdown.Item>
+                  <Dropdown.Item as={Link} to='/admin/orderlist'>
+                    Order List
+                  </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={logoutHandler}>Sign Out</Dropdown.Item>
                 </Dropdown.Menu>

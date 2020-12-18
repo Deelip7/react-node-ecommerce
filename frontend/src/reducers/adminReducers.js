@@ -112,3 +112,49 @@ export const adminUpdateProductReducer = (state = { product: {} }, action) => {
       return state;
   }
 };
+
+export const adminListOrdersReducer = (state = { orders: [] }, action) => {
+  switch (action.type) {
+    case actions.ADMIN_LIST_ORDERS_REQUEST:
+      return {
+        loading: true,
+      };
+    case actions.ADMIN_LIST_ORDERS_SUCCESS:
+      return {
+        loading: false,
+        orders: action.payload,
+      };
+    case actions.ADMIN_LIST_ORDERS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case actions.ADMIN_LIST_ORDERS_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const adminDeliveredOrderReducer = (state = { order: [] }, action) => {
+  switch (action.type) {
+    case actions.ADMIN_UPDATE_ORDER_TO_DELIVERED_REQUEST:
+      return {
+        loading: true,
+      };
+    case actions.ADMIN_UPDATE_ORDER_TO_DELIVERED_SUCCESS:
+      return {
+        loading: false,
+        order: action.payload,
+      };
+    case actions.ADMIN_UPDATE_ORDER_TO_DELIVERED_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case actions.ADMIN_UPDATE_ORDER_TO_DELIVERED_RESET:
+      return {};
+    default:
+      return state;
+  }
+};

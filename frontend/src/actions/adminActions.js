@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as actions from '../constants/adminConstants';
 import { USER_DETAILS_SUCCESS, USER_DETAILS_RESET } from '../constants/userConstants';
 import { PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_RESET } from '../constants/productConstants';
+// import {} from '../constants/orderConstants'
 
 export const adminUsersList = () => async (dispatch, getState) => {
   try {
@@ -147,6 +148,35 @@ export const adminProductDelete = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: actions.ADMIN_DELETE_PRODUCT_FAIL,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};
+
+export const adminOrdersList = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: actions.ADMIN_LIST_ORDERS_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/orders/`, config);
+
+    dispatch({
+      type: actions.ADMIN_LIST_ORDERS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: actions.ADMIN_LIST_ORDERS_FAIL,
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }
