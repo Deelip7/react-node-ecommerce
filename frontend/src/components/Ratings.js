@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Rating = ({ rating }) => {
+const Ratings = ({ rating }) => {
   return (
     <>
       <span>
@@ -18,9 +18,8 @@ const Rating = ({ rating }) => {
       <span>
         <i style={{ color: '#f68872', fill: 'red' }} className={rating >= 5 ? 'fas fa-star' : rating >= 4.5 ? 'fas fa-star-half-alt' : 'far fa-star'}></i>
       </span>
-      {/* {` ${rating}/5`} */}
     </>
   );
 };
 
-export default Rating;
+export default Ratings;

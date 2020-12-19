@@ -15,6 +15,8 @@
     justify-content: space-between;
     width: 100%;
     gap: 5rem;
+    padding-bottom: 6rem;
+    border-bottom: 1px solid #e2e2e3;
 
     &__price {
       font-size: 1.5rem;
@@ -59,12 +61,13 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin: 5rem 0;
+    margin: 4.5rem 0;
+
     & > div {
       max-width: 100% !important;
     }
     .ui.comments .comment {
-      margin-bottom: 1.1rem;
+      margin-bottom: 3rem;
     }
     .metadata {
       margin-bottom: 0.7rem !important;
@@ -73,6 +76,13 @@
     .metadata div {
       margin-top: 0.7rem !important;
     }
+    .ui.comments .comment .metadata > span {
+      margin: 0;
+    }
+
+    .review-rating {
+      margin: 0 3rem 1rem;
+    }
     .ui.form textarea {
       max-width: 90% !important;
       max-height: 100px !important;
@@ -80,6 +90,9 @@
     }
     Button {
       margin: 0 3rem;
+    }
+    .review__span {
+      margin: 0 3rem 1rem;
     }
   }
 
@@ -139,6 +152,12 @@
       .ui.form textarea {
         max-width: 100% !important;
         margin: 0;
+      }
+      .review-rating {
+        margin: 0 0 1rem;
+      }
+      .review__span {
+        margin: 0 0 1rem;
       }
     }
   }

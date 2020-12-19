@@ -1,5 +1,5 @@
 import React from 'react';
-import Rating from '../components/Rating';
+import Ratings from '../components/Ratings';
 import { Link } from 'react-router-dom';
 
 const Product = ({ product }) => {
@@ -23,7 +23,7 @@ const Product = ({ product }) => {
         <div className='card__title'>{product.name}</div>
       </Link>
       <div className='card__rating'>
-        <Rating rating={product.rating} />
+        <Ratings rating={product.rating} />
       </div>
 
       <div className='card__price'>${product.price}</div>

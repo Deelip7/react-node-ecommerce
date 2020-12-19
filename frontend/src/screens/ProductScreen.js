@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Rating from '../components/Rating';
-import { listProductDetails } from '../actions/productActions';
-import { Button, Comment, Divider, Form, Header, Select } from 'semantic-ui-react';
+import Ratings from '../components/Ratings';
+import { listProductDetails, Productreview } from '../actions/productActions';
+import { Button, Comment, Divider, Form, Header, Select, Rating, Label } from 'semantic-ui-react';
 
 import Page404 from '../components/Page404';
 import Loader from '../components/Loader';
@@ -11,23 +11,49 @@ const ProductScreen = ({ match, history }) => {
   const dispatch = useDispatch(0);
 
   const [qty, setQty] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState(' ');
 
   const productDetails = useSelector((state) => state.productDetails);
+
+  const productReview = useSelector((state) => state.productReview);
+  const { success: successProductReview, loading: loadingProductReview, error: errorProductReview } = productReview;
+  // alert(errorProductReview);
 
   const { loading, product, error } = productDetails;
 
   useEffect(() => {
+    if (successProductReview) {
+      setRating(0);
+      setComment(' ');
+    }
     dispatch(listProductDetails(match.params.id));
-  }, [dispatch, match]);
+  }, [dispatch, match, successProductReview]);
 
   const qtyOptions = product ? [...Array(product.numInStock).keys()].map((p) => ({ text: `${p + 1}`, value: `${p + 1}` })) : [];
 
   const getQty = (e, { value }) => {
     setQty(Number(value));
   };
+  const ratingHandler = (e, { rating }) => {
+    setRating(rating);
+  };
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
+  const reviewHandler = (e) => {
+    e.preventDefault();
+    if (!rating) {
+      alert('Please enter a rating');
+    } else {
+      dispatch(
+        Productreview(match.params.id, {
+          rating,
+          comment,
+        })
+      );
+    }
   };
 
   return (
@@ -40,7 +66,7 @@ const ProductScreen = ({ match, history }) => {
         <div className='product-container'>
           <div className='product'>
             <div className='product__info'>
-              <Rating rating={product.rating} />
+              <Ratings rating={product.rating} />
               <h1 className='product__name'>{product.name}</h1>
               <div className='product__price'>${product.price}</div>
               <div className='product__detail'>
@@ -59,64 +85,39 @@ const ProductScreen = ({ match, history }) => {
               <img src={product.image} alt={product.name} />
             </div>
           </div>
-          <Divider />
           <div className='review'>
-            <h2>Reviews</h2>
+            <h2>Customer Reviews</h2>
             <Comment.Group className='product__review'>
-              <Comment>
-                <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
-                <Comment.Content>
-                  <Comment.Metadata>
-                    <Rating rating={product.rating} />
-                  </Comment.Metadata>
-                  <Comment.Author>Joe Henderson</Comment.Author>
-                  <Comment.Metadata>
-                    <div>1 day ago</div>
-                  </Comment.Metadata>
-                  <Comment.Text>
-                    <p>The hours, minutes and seconds stand as visible reminders that your effort put them all there.</p>
-                    <p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
-                  </Comment.Text>
-                </Comment.Content>
-              </Comment>
+              {product.review.length > 0 ? (
+                product.review.map((r) => (
+                  <Comment key={r._id}>
+                    <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
+                    <Comment.Content>
+                      <Comment.Metadata>
+                        <Ratings rating={r.rating} />
+                      </Comment.Metadata>
+                      <Comment.Author>{r.name}</Comment.Author>
+                      <Comment.Metadata>
+                        <div>{r.updatedAt.split('T')[0]}</div>
+                      </Comment.Metadata>
+                      <Comment.Text>
+                        <p>{r.comment}</p>
+                      </Comment.Text>
+                    </Comment.Content>
+                  </Comment>
+                ))
+              ) : (
+                <span className='review__span'>Be the first to review this product.</span>
+              )}
 
-              <Comment>
-                <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
-                <Comment.Content>
-                  <Comment.Metadata>
-                    <Rating rating={product.rating} />
-                  </Comment.Metadata>
-                  <Comment.Author>Joe Henderson</Comment.Author>
-                  <Comment.Metadata>
-                    <div>1 day ago</div>
-                  </Comment.Metadata>
-                  <Comment.Text>
-                    <p>The hours, minutes and seconds stand as visible reminders that your effort put them all there.</p>
-                    <p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
-                  </Comment.Text>
-                </Comment.Content>
-              </Comment>
-
-              <Comment>
-                <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
-                <Comment.Content>
-                  <Comment.Metadata>
-                    <Rating rating={product.rating} />
-                  </Comment.Metadata>
-                  <Comment.Author>Joe Henderson</Comment.Author>
-                  <Comment.Metadata>
-                    <div>1 day ago</div>
-                  </Comment.Metadata>
-                  <Comment.Text>
-                    <p>The hours, minutes and seconds stand as visible reminders that your effort put them all there.</p>
-                    <p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
-                  </Comment.Text>
-                </Comment.Content>
-              </Comment>
-
+              <h2>Review this product</h2>
+              <span className='review__span'>Share your thoughts with other customers</span>
               <Form reply>
-                <Form.TextArea />
-                <Button content='Add Comment' basic />
+                <Form.TextArea onChange={(e) => setComment(e.target.value)} />
+                <div className='review-rating'>
+                  <Rating maxRating={5} defaultRating={successProductReview ? 0 : 0} onRate={ratingHandler} size='huge' required clearable />
+                </div>
+                <Button content='Write a review' basic type='button' onClick={(e) => reviewHandler(e)} />
               </Form>
             </Comment.Group>
           </div>

@@ -96,11 +96,11 @@ const createProduct = asyncHandler(async (req, res) => {
 const createProductReview = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body;
 
-  console.log(comment, rating);
   const product = await Product.findById(req.params.id);
 
   if (product) {
-    const alreadyReviewed = product.review.find((review) => review.user === req.user._id);
+    const alreadyReviewed = product.review.find((review) => review.user.toString() === req.user._id.toString());
+    console.log(alreadyReviewed);
 
     if (alreadyReviewed) {
       res.status(400);

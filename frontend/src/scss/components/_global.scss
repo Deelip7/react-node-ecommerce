@@ -122,3 +122,9 @@ button,
 .ui.dropdown .menu > .divider {
   margin: 0 !important;
 }
+
+.ui.rating .active.icon,
+.ui.rating .icon.selected {
+  color: #f68872 !important;
+  text-shadow: 0 -1px 0 #f68872, -1px 0 0 #f68872, 0 1px 0 #f68872, 1px 0 0 #f68872 !important;
+}

@@ -37,4 +37,32 @@ const listProductDetails = (id) => async (dispatch) => {
   }
 };
 
-export { listProducts, listProductDetails };
+const Productreview = (id, review) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: actions.PRODUCT_REVIEW_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.post(`/api/products/${id}/reviews`, review, config);
+
+    dispatch({
+      type: actions.PRODUCT_REVIEW_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: actions.PRODUCT_REVIEW_FAIL,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};
+
+export { listProducts, listProductDetails, Productreview };
