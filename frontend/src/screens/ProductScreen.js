@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Ratings from '../components/Ratings';
 import { listProductDetails, Productreview } from '../actions/productActions';
-import { Button, Comment, Divider, Form, Header, Select, Rating, Label } from 'semantic-ui-react';
-
+import { Button, Comment, Form, Select, Rating } from 'semantic-ui-react';
 import Page404 from '../components/Page404';
 import Loader from '../components/Loader';
 
@@ -86,6 +85,7 @@ const ProductScreen = ({ match, history }) => {
             </div>
           </div>
           <div className='review'>
+            {loadingProductReview && <Loader />}
             <h2>Customer Reviews</h2>
             <Comment.Group className='product__review'>
               {product.review.length > 0 ? (
@@ -115,7 +115,7 @@ const ProductScreen = ({ match, history }) => {
               <Form reply>
                 <Form.TextArea onChange={(e) => setComment(e.target.value)} />
                 <div className='review-rating'>
-                  <Rating maxRating={5} defaultRating={successProductReview ? 0 : 0} onRate={ratingHandler} size='huge' required clearable />
+                  <Rating maxRating={5} onRate={ratingHandler} size='huge' required clearable />
                 </div>
                 <Button content='Write a review' basic type='button' onClick={(e) => reviewHandler(e)} />
               </Form>

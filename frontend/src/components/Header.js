@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dropdown, Label, Menu } from 'semantic-ui-react';
+import { Button, Dropdown, Form, Icon, Input, Label, Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
-const Header = ({ location }) => {
+const Header = ({ location, history }) => {
+  const [keyword, setKeyword] = useState('');
+
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -23,6 +25,16 @@ const Header = ({ location }) => {
     dispatch(logout());
   };
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(keyword);
+    // if (keyword.trim()) {
+    //   history.push(`/search/${keyword}`);
+    // } else {
+    //   history.push('/');
+    // }
+  };
+
   return (
     <div className='nav-header'>
       <div className='nav'>
@@ -32,12 +44,11 @@ const Header = ({ location }) => {
           </Link>
         </div>
 
-        <div className='nav__search'>
-          <button type='submit'>
-            <img src='/images/icons/search.svg' alt='' />
-          </button>
-          <input type='text' placeholder='Search'></input>
-        </div>
+        <Form className='nav__search' onSubmit={submitHandler}>
+          <Form.Field>
+            <Input icon={<Button icon='search' basic type='submit' />} placeholder='Search...' onChange={(e) => setKeyword(e.target.value)} />
+          </Form.Field>
+        </Form>
 
         <div className='nav__cart'>
           <Menu compact>
