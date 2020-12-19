@@ -1,13 +1,22 @@
 .product-container {
   display: flex;
-  justify-content: center;
-  align-content: center;
-  margin: 4.5rem auto 0;
+  flex-direction: column;
+  margin: 4.5rem auto;
+  max-width: 1400px;
+  padding: 0 2rem;
+
+  .review {
+    display: flex;
+    justify-content: center;
+    border: 1px solid #000;
+    &__comment {
+      width: 100%;
+    }
+  }
 
   .product {
     display: flex;
     justify-content: center;
-    padding: 0 2rem;
     gap: 5rem;
 
     &__price {

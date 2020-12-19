@@ -120,7 +120,7 @@ const createProductReview = asyncHandler(async (req, res) => {
 
     await product.save();
 
-    res.json(product);
+    res.status(201).json(product);
   } else {
     res.status(404);
     throw new Error('Product not found');

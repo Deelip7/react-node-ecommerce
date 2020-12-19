@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Rating from '../components/Rating';
 import { listProductDetails } from '../actions/productActions';
-import { Form, Select, Button } from 'semantic-ui-react';
+import { Button, Comment, Form, Header, Select } from 'semantic-ui-react';
+
 import Page404 from '../components/Page404';
 import Loader from '../components/Loader';
 
@@ -57,6 +58,32 @@ const ProductScreen = ({ match, history }) => {
             <div className='product__image'>
               <img src={product.image} alt={product.name} />
             </div>
+          </div>
+          <div className='review'>
+            <Comment.Group className='review__comment'>
+              <Header as='h3' dividing>
+                Comments
+              </Header>
+
+              <Comment>
+                <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
+                <Comment.Content>
+                  <Comment.Author as='a'>Matt</Comment.Author>
+                  <Comment.Metadata>
+                    <div>Today at 5:42PM</div>
+                  </Comment.Metadata>
+                  <Comment.Text>How artistic!</Comment.Text>
+                  <Comment.Actions>
+                    <Comment.Action>Reply</Comment.Action>
+                  </Comment.Actions>
+                </Comment.Content>
+              </Comment>
+
+              <Form reply>
+                <Form.TextArea />
+                <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+              </Form>
+            </Comment.Group>
           </div>
         </div>
       )}
