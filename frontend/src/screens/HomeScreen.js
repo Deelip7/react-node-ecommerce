@@ -27,6 +27,9 @@ const HomeScreen = ({ match }) => {
         </div>
       ) : (
         <div>
+          {keyword && !productList.products.length && (
+            <Message style={{ margin: '5rem auto', width: '50%' }} header={`No results for ${keyword}`} content='Try checking your spelling or use more general terms' />
+          )}
           <div className='card-container'>
             {products
               .sort((a, b) => b.numInStock - a.numInStock)

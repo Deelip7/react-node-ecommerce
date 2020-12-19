@@ -13,6 +13,9 @@ const Header = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const productList = useSelector((state) => state.productList);
+  const { loading } = productList;
+
   const cartItemsNum = String(cartItems.reduce((a, { qty }) => a + qty, 0));
 
   const trigger = (
@@ -27,6 +30,11 @@ const Header = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (e.target.classList.contains('nav__search')) {
+      e.target[0].value = '';
+    }
+
     if (keyword.trim()) {
       history.push(`/search/${keyword}`);
     } else {
@@ -45,7 +53,7 @@ const Header = ({ history }) => {
 
         <Form className='nav__search' onSubmit={submitHandler}>
           <Form.Field>
-            <Input icon={<Button icon='search' basic type='submit' />} placeholder='Search...' onChange={(e) => setKeyword(e.target.value)} />
+            <Input id='nav__input' icon={<Button icon='search' basic type='submit' loading={loading} />} placeholder='Search...' onChange={(e) => setKeyword(e.target.value)} />
           </Form.Field>
         </Form>
 
