@@ -1,6 +1,6 @@
 const products = [
   {
-    name: 'Product 1',
+    name: 'Cannon ',
     image: '/images/1.jpg',
     detail:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quae repudiandae soluta veniam, quis minima earum ducimus quasi, ea error voluptate animi natus architecto saepe quaerat, ipsam doloribus beatae blanditiis!',
@@ -10,7 +10,7 @@ const products = [
     numReview: 5,
   },
   {
-    name: 'Product 2',
+    name: 'Boss',
     image: '/images/2.jpg',
     detail:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quae repudiandae soluta veniam, quis minima earum ducimus quasi, ea error voluptate animi natus architecto saepe quaerat, ipsam doloribus beatae blanditiis!',
@@ -20,7 +20,7 @@ const products = [
     numReview: 4,
   },
   {
-    name: 'Product 3',
+    name: 'Iphone',
     image: '/images/3.jpg',
     detail:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quae repudiandae soluta veniam, quis minima earum ducimus quasi, ea error voluptate animi natus architecto saepe quaerat, ipsam doloribus beatae blanditiis!',
@@ -30,7 +30,7 @@ const products = [
     numReview: 3,
   },
   {
-    name: 'Product 4',
+    name: 'PS4 Controller',
     image: '/images/44.jpg',
     detail:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quae repudiandae soluta veniam, quis minima earum ducimus quasi, ea error voluptate animi natus architecto saepe quaerat, ipsam doloribus beatae blanditiis!',
@@ -40,7 +40,7 @@ const products = [
     numReview: 4,
   },
   {
-    name: 'Product 5',
+    name: 'Xbox Controller',
     image: '/images/5.jpg',
     detail:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quae repudiandae soluta veniam, quis minima earum ducimus quasi, ea error voluptate animi natus architecto saepe quaerat, ipsam doloribus beatae blanditiis!',
@@ -50,7 +50,7 @@ const products = [
     numReview: 4,
   },
   {
-    name: 'Product 6',
+    name: 'GTX 1080 TI',
     image: '/images/6.jpg',
     detail:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quae repudiandae soluta veniam, quis minima earum ducimus quasi, ea error voluptate animi natus architecto saepe quaerat, ipsam doloribus beatae blanditiis!',
@@ -60,7 +60,7 @@ const products = [
     numReview: 4,
   },
   {
-    name: 'Product 7',
+    name: 'Google Mini',
     image: '/images/7.jpg',
     detail:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quae repudiandae soluta veniam, quis minima earum ducimus quasi, ea error voluptate animi natus architecto saepe quaerat, ipsam doloribus beatae blanditiis!',

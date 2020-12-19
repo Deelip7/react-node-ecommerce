@@ -1,11 +1,11 @@
 import axios from 'axios';
 import * as actions from '../constants/productConstants';
 
-const listProducts = () => async (dispatch) => {
+const listProducts = (keyword = '') => async (dispatch) => {
   try {
     dispatch({ type: actions.PRODUCT_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/products`);
+    const { data } = await axios.get(`/api/products?keyword=${keyword}`);
 
     dispatch({
       type: actions.PRODUCT_LIST_SUCCESS,

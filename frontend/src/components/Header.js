@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Dropdown, Form, Icon, Input, Label, Menu } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Button, Dropdown, Form, Input, Label, Menu } from 'semantic-ui-react';
+import { Link, withRouter } from 'react-router-dom';
 import { logout } from '../actions/userActions';
 
-const Header = ({ location, history }) => {
+const Header = ({ history }) => {
   const [keyword, setKeyword] = useState('');
 
   const { cartItems } = useSelector((state) => state.cart);
@@ -27,12 +27,11 @@ const Header = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(keyword);
-    // if (keyword.trim()) {
-    //   history.push(`/search/${keyword}`);
-    // } else {
-    //   history.push('/');
-    // }
+    if (keyword.trim()) {
+      history.push(`/search/${keyword}`);
+    } else {
+      history.push('/');
+    }
   };
 
   return (
@@ -127,4 +126,4 @@ const Header = ({ location, history }) => {
   );
 };
 
-export default Header;
+export default withRouter(Header);
