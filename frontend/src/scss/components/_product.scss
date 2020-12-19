@@ -1,22 +1,19 @@
 .product-container {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   margin: 4.5rem auto;
   max-width: 1400px;
-  padding: 0 2rem;
+  padding: 0 3rem;
 
-  .review {
-    display: flex;
-    justify-content: center;
-    border: 1px solid #000;
-    &__comment {
-      width: 100%;
-    }
+  .ui .comments .review__comment {
+    max-width: 1400px;
   }
 
   .product {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
     gap: 5rem;
 
     &__price {
@@ -57,11 +54,41 @@
         max-width: 50vw;
       }
     }
+  }
+  .review {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 5rem 0;
+    & > div {
+      max-width: 100% !important;
+    }
+    .ui.comments .comment {
+      margin-bottom: 1.1rem;
+    }
+    .metadata {
+      margin-bottom: 0.7rem !important;
+      margin-left: 0 !important;
+    }
+    .metadata div {
+      margin-top: 0.7rem !important;
+    }
+    .ui.form textarea {
+      max-width: 90% !important;
+      max-height: 100px !important;
+      margin: 0 3rem;
+    }
+    Button {
+      margin: 0 3rem;
+    }
+  }
 
-    @media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
+    padding: 0 1.1rem;
+
+    .product {
       flex-direction: column;
       gap: 4rem;
-      padding: 0 1rem;
 
       &__info {
         order: 2;
@@ -85,13 +112,34 @@
           width: 100%;
         }
       }
-    }
 
-    &__image img {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      display: block;
+      &__image img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+    .review {
+      & > div {
+        max-width: 100% !important;
+      }
+      .product__review .comment {
+        display: flex;
+        flex-direction: column;
+      }
+      .ui.comments .comment > .avatar ~ .content {
+        margin: 1.1rem 0 !important;
+      }
+
+      Button {
+        width: 100% !important;
+        margin: 0;
+      }
+      .ui.form textarea {
+        max-width: 100% !important;
+        margin: 0;
+      }
     }
   }
 }

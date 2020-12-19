@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Rating from '../components/Rating';
 import { listProductDetails } from '../actions/productActions';
-import { Button, Comment, Form, Header, Select } from 'semantic-ui-react';
+import { Button, Comment, Divider, Form, Header, Select } from 'semantic-ui-react';
 
 import Page404 from '../components/Page404';
 import Loader from '../components/Loader';
@@ -59,29 +59,64 @@ const ProductScreen = ({ match, history }) => {
               <img src={product.image} alt={product.name} />
             </div>
           </div>
+          <Divider />
           <div className='review'>
-            <Comment.Group className='review__comment'>
-              <Header as='h3' dividing>
-                Comments
-              </Header>
+            <h2>Reviews</h2>
+            <Comment.Group className='product__review'>
+              <Comment>
+                <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
+                <Comment.Content>
+                  <Comment.Metadata>
+                    <Rating rating={product.rating} />
+                  </Comment.Metadata>
+                  <Comment.Author>Joe Henderson</Comment.Author>
+                  <Comment.Metadata>
+                    <div>1 day ago</div>
+                  </Comment.Metadata>
+                  <Comment.Text>
+                    <p>The hours, minutes and seconds stand as visible reminders that your effort put them all there.</p>
+                    <p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
+                  </Comment.Text>
+                </Comment.Content>
+              </Comment>
 
               <Comment>
-                <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
+                <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
                 <Comment.Content>
-                  <Comment.Author as='a'>Matt</Comment.Author>
                   <Comment.Metadata>
-                    <div>Today at 5:42PM</div>
+                    <Rating rating={product.rating} />
                   </Comment.Metadata>
-                  <Comment.Text>How artistic!</Comment.Text>
-                  <Comment.Actions>
-                    <Comment.Action>Reply</Comment.Action>
-                  </Comment.Actions>
+                  <Comment.Author>Joe Henderson</Comment.Author>
+                  <Comment.Metadata>
+                    <div>1 day ago</div>
+                  </Comment.Metadata>
+                  <Comment.Text>
+                    <p>The hours, minutes and seconds stand as visible reminders that your effort put them all there.</p>
+                    <p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
+                  </Comment.Text>
+                </Comment.Content>
+              </Comment>
+
+              <Comment>
+                <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
+                <Comment.Content>
+                  <Comment.Metadata>
+                    <Rating rating={product.rating} />
+                  </Comment.Metadata>
+                  <Comment.Author>Joe Henderson</Comment.Author>
+                  <Comment.Metadata>
+                    <div>1 day ago</div>
+                  </Comment.Metadata>
+                  <Comment.Text>
+                    <p>The hours, minutes and seconds stand as visible reminders that your effort put them all there.</p>
+                    <p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
+                  </Comment.Text>
                 </Comment.Content>
               </Comment>
 
               <Form reply>
                 <Form.TextArea />
-                <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+                <Button content='Add Comment' basic />
               </Form>
             </Comment.Group>
           </div>
