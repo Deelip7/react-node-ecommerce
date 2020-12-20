@@ -86,7 +86,7 @@ const ProductScreen = ({ match, history }) => {
           </div>
           <div className='review'>
             {loadingProductReview && <Loader />}
-            <h2>Customer Reviews</h2>
+            <h3>Customer Reviews</h3>
             <Comment.Group className='product__review'>
               {product.review.length > 0 ? (
                 product.review.map((r) => (
@@ -110,7 +110,7 @@ const ProductScreen = ({ match, history }) => {
                 <span className='review__span'>Be the first to review this product.</span>
               )}
 
-              <h2>Review this product</h2>
+              <h3>Review this product</h3>
               <span className='review__span'>Share your thoughts with other customers</span>
               <Form reply>
                 <Form.TextArea onChange={(e) => setComment(e.target.value)} />

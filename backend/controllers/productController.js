@@ -5,6 +5,8 @@ import asyncHandler from 'express-async-handler';
 // @route GET /api/products
 // @acess Public
 const getProducts = asyncHandler(async (req, res) => {
+  const pageSize = 4;
+  const selectedPage = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {
         name: {
@@ -14,9 +16,12 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const products = await Product.find({ ...keyword });
+  const productCount = await Product.countDocuments({ ...keyword });
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (selectedPage - 1));
 
-  res.json(products);
+  res.json({ products, selectedPage, totalPages: Math.ceil(productCount / pageSize) });
 });
 
 // @desc Fetch a product

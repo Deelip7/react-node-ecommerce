@@ -4,18 +4,20 @@ import Product from '../components/Product';
 import { listProducts } from '../actions/productActions';
 import { Message } from 'semantic-ui-react';
 import Loader from '../components/Loader';
+import Paginate from '../components/Paginate';
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
+  const pageNumber = match.params.pageNumber || 1;
 
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
-  const { loading, products, error } = productList;
+  const { loading, products, error, totalPages, selectedPage } = productList;
 
   useEffect(() => {
-    dispatch(listProducts(keyword));
-  }, [dispatch, keyword]);
+    dispatch(listProducts(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
 
   return (
     <>
@@ -26,7 +28,7 @@ const HomeScreen = ({ match }) => {
           <Message style={{ margin: '0 auto', width: '50%' }} error header='Something went wrong. Please try again' list={[error]} />
         </div>
       ) : (
-        <div>
+        <div className='product-card'>
           {keyword && !productList.products.length && (
             <Message style={{ margin: '5rem auto', width: '50%' }} header={`No results for ${keyword}`} content='Try checking your spelling or use more general terms' />
           )}
@@ -37,6 +39,7 @@ const HomeScreen = ({ match }) => {
                 <Product product={product} key={product._id} />
               ))}
           </div>
+          <Paginate totalPages={totalPages} selectedPage={selectedPage} keyword={keyword} />
         </div>
       )}
     </>
