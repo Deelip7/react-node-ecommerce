@@ -18,6 +18,7 @@ import AdminUserEditScreen from './screens/AdminUserEditScreen';
 import AdminProductListScreen from './screens/AdminProductListScreen';
 import AdminProductEditScreen from './screens/AdminProductEditScreen';
 import AdminOrderListScreen from './screens/AdminOrderListScreen';
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
       <div className='App'>
         <Header />
         <main>
+          <ScrollToTop />
           <Switch>
             <Route path='/orders/:id' component={OrderScreen} />
             <Route path='/placeorder' component={PlaceOrderScreen} />
