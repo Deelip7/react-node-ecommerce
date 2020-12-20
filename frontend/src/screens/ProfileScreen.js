@@ -4,6 +4,7 @@ import { Button, Modal, Divider, Icon, Message } from 'semantic-ui-react';
 import { getUserOrderList } from '../actions/orderActions';
 import { getUserDetails } from '../actions/userActions';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import ProfileEdit from '../components/ProfileEdit';
 import UserOrders from '../components/UserOrders';
 import { ORDER_LIST_RESET } from '../constants/orderConstants';
@@ -37,6 +38,7 @@ const ProfileScreen = ({ history }) => {
 
   return (
     <>
+      <Meta title='Profile' />
       {userLoading && <Loader />}
       {userError && <Message error list={[error]} />}
 

@@ -8,6 +8,7 @@ import { getOrderDetails, updateOrderToPaid } from '../actions/orderActions';
 import Page404 from '../components/Page404';
 import Loader from '../components/Loader';
 import { ORDER_PAY_RESET } from '../constants/orderConstants';
+import Meta from '../components/Meta';
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
@@ -77,6 +78,7 @@ const OrderScreen = ({ match, history }) => {
     <Page404 />
   ) : (
     <div className='order-container'>
+      <Meta title='Order' />
       <div className='order-details'>
         {order.isPaid ? (
           <h2>

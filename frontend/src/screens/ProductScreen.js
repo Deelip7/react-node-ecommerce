@@ -5,6 +5,7 @@ import { listProductDetails, Productreview } from '../actions/productActions';
 import { Button, Comment, Form, Select, Rating } from 'semantic-ui-react';
 import Page404 from '../components/Page404';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 
 const ProductScreen = ({ match, history }) => {
   const dispatch = useDispatch(0);
@@ -63,6 +64,8 @@ const ProductScreen = ({ match, history }) => {
         <Page404 />
       ) : (
         <div className='product-container'>
+          <Meta title={product.name} />
+
           <div className='product'>
             <div className='product__info'>
               <Ratings rating={product.rating} />

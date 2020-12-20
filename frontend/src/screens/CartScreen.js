@@ -5,6 +5,7 @@ import { Breadcrumb, Button } from 'semantic-ui-react';
 import { addToCart } from '../actions/cartActions';
 import CartEmpty from '../components/CartEmpty';
 import CartItems from '../components/CartItems';
+import Meta from '../components/Meta';
 
 const CartScreen = ({ match, location, history }) => {
   const queryString = location.search.split('=')[1];
@@ -30,37 +31,40 @@ const CartScreen = ({ match, location, history }) => {
   };
 
   return (
-    <div className='cart-container'>
-      {cartItems.length === 0 ? (
-        <CartEmpty />
-      ) : (
-        <>
-          <header>
-            <Breadcrumb>
-              <Breadcrumb.Section as={Link} to='/'>
-                Home
-              </Breadcrumb.Section>
-              <Breadcrumb.Divider />
-              <Breadcrumb.Section>Cart</Breadcrumb.Section>
-            </Breadcrumb>
-            <h1>Your Cart</h1>
-          </header>
-          <div>
-            {cartItems.map((e) => (
-              <CartItems key={e.product} items={e} />
-            ))}
-          </div>
-          <div className='cart-subtotal'>
-            <h4>
-              SubTotal: <span style={{ fontWeight: 'normal', float: 'right' }}>${subTotal}</span>
-            </h4>
-            <Button color='black' type='button' onClick={checkoutHandler}>
-              Proceed to checkout
-            </Button>
-          </div>
-        </>
-      )}
-    </div>
+    <>
+      <Meta title='Cart' />
+      <div className='cart-container'>
+        {cartItems.length === 0 ? (
+          <CartEmpty />
+        ) : (
+          <>
+            <header>
+              <Breadcrumb>
+                <Breadcrumb.Section as={Link} to='/'>
+                  Home
+                </Breadcrumb.Section>
+                <Breadcrumb.Divider />
+                <Breadcrumb.Section>Cart</Breadcrumb.Section>
+              </Breadcrumb>
+              <h1>Your Cart</h1>
+            </header>
+            <div>
+              {cartItems.map((e) => (
+                <CartItems key={e.product} items={e} />
+              ))}
+            </div>
+            <div className='cart-subtotal'>
+              <h4>
+                SubTotal: <span style={{ fontWeight: 'normal', float: 'right' }}></span>
+              </h4>
+              <Button color='black' type='button' onClick={checkoutHandler}>
+                Proceed to checkout
+              </Button>
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

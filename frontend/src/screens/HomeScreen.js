@@ -5,6 +5,7 @@ import { listProducts } from '../actions/productActions';
 import { Message } from 'semantic-ui-react';
 import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
+import Meta from '../components/Meta';
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -21,6 +22,7 @@ const HomeScreen = ({ match }) => {
 
   return (
     <>
+      <Meta title='Welcome' />
       {loading ? (
         <Loader />
       ) : error ? (
