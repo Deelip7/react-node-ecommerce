@@ -5,6 +5,7 @@ import { Button, Divider, Form, Message } from 'semantic-ui-react';
 import { register } from '../actions/userActions';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 
 const RegisterScreen = ({ history, location }) => {
   const dispatch = useDispatch();
@@ -37,6 +38,8 @@ const RegisterScreen = ({ history, location }) => {
 
   return (
     <>
+      <Meta title={'Register'} />
+
       {loading && <Loader />}
       {error && <Message error list={[error]} />}
       <FormContainer>

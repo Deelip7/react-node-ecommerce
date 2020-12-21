@@ -6,6 +6,12 @@
   max-width: 1400px;
   padding: 0 5rem;
 
+  img {
+    width: 400px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
   .ui .comments .review__comment {
     max-width: 1400px;
   }
@@ -161,4 +167,10 @@
       }
     }
   }
+}
+
+.dropzone {
+  border: 1px dashed rgb(205, 205, 205);
+  padding: 2rem;
+  margin: 2rem 0;
 }

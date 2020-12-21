@@ -5,6 +5,7 @@ import { Button, Divider, Form, Message } from 'semantic-ui-react';
 import { login } from '../actions/userActions';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
+import Meta from '../components/Meta';
 
 const LoginScreen = ({ history, location }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const LoginScreen = ({ history, location }) => {
 
   return (
     <>
+      <Meta title={'Login'} />
       {loading && <Loader />}
       <FormContainer>
         {error && <Message error list={[error]} />}
