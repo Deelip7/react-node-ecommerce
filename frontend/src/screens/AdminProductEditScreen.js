@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Form, Label, Message } from 'semantic-ui-react';
+import { Button, Form, Message } from 'semantic-ui-react';
 import { adminProductUpdate } from '../actions/adminActions';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import { ADMIN_UPDATE_PRODUCT_RESET } from '../constants/adminConstants';
 import { listProductDetails } from '../actions/productActions';
 import { useDropzone } from 'react-dropzone';
+import axios from 'axios';
 
 const AdminProductEditScreen = ({ match, history }) => {
   const productId = match.params.id;
@@ -15,9 +16,11 @@ const AdminProductEditScreen = ({ match, history }) => {
 
   const [name, setName] = useState('');
   const [detail, setDetail] = useState('');
+  // const [image, setImage] = useState('/logo192.png');
   const [image, setImage] = useState('');
   const [price, setPrice] = useState('');
   const [numInStock, setNumInStock] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
@@ -29,7 +32,7 @@ const AdminProductEditScreen = ({ match, history }) => {
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = adminUpdateProduct;
 
   useEffect(() => {
-    if (successUpdate) {
+    if (successUpdate && !fileRejections.length) {
       dispatch({ type: ADMIN_UPDATE_PRODUCT_RESET });
       history.push('/admin/productlist');
     } else {
@@ -40,25 +43,52 @@ const AdminProductEditScreen = ({ match, history }) => {
         setDetail(product.detail);
         setPrice(product.price);
         setNumInStock(product.numInStock);
+        setImage(product.image);
       }
     }
   }, [dispatch, history, product]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log(name);
-    dispatch(adminProductUpdate({ _id: productId, name, price, numInStock }));
+  const onDrop = useCallback((acceptedFiles) => {
+    uploadFileHandler(acceptedFiles);
+  }, []);
+
+  const { acceptedFiles, fileRejections, getRootProps, getInputProps, isDragActive } = useDropzone({ accept: 'image/jpeg, image/png', onDrop });
+
+  const uploadFileHandler = async (acceptedFiles) => {
+    if (acceptedFiles.length) {
+      const file = acceptedFiles[0];
+      const formData = new FormData();
+      formData.append('image', file);
+      setUploading('true');
+
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        };
+
+        const { data } = await axios.post(`/api/upload`, formData, config);
+        console.log(data);
+        setImage(data);
+        setUploading(false);
+      } catch (error) {
+        console.log(error);
+        setUploading(false);
+      }
+    }
   };
 
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
-
-  console.log(acceptedFiles);
-
-  const files = acceptedFiles.map((file) => (
-    <li key={file.path}>
+  const file = acceptedFiles.map((file) => (
+    <div key={file.path}>
       {file.path} - {file.size} bytes
-    </li>
+    </div>
   ));
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(adminProductUpdate({ _id: productId, name, price, numInStock, image }));
+  };
 
   return (
     <>
@@ -78,16 +108,15 @@ const AdminProductEditScreen = ({ match, history }) => {
             <Form.Input size='large' icon='dollar sign' iconPosition='left' label='Price' type='text' placeholder='Price' onChange={(e) => setPrice(e.target.value)} value={price} />
             <Form.Input size='large' icon='hashtag' iconPosition='left' label='NumInStock' type='text' placeholder='NumInStock' onChange={(e) => setNumInStock(e.target.value)} value={numInStock} />
 
-            <section>
-              <aside>
-                <h4>Files</h4>
-                <ul>{files}</ul>
-              </aside>
-              <div {...getRootProps({ className: 'dropzone' })}>
-                <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
-              </div>
-            </section>
+            <Form.Input size='large' icon='image outline' iconPosition='left' label='Image' type='text' value={image} />
+
+            <div {...getRootProps({ className: 'dropzone' })}>
+              <input {...getInputProps()} />
+              {isDragActive ? <p>Drop the files here ...</p> : <p>Drag 'n' drop image file here, or click to select files. (Only *.jpeg and *.png)</p>}
+            </div>
+
+            {acceptedFiles.length ? <Message positive>Accepted. {file}</Message> : null}
+            {fileRejections.length ? <Message negative>This image format is not supported. Only *.jpeg and *.png images will be accepted</Message> : null}
 
             <Button color='black' type='submit' style={{ width: '100%' }}>
               Update
