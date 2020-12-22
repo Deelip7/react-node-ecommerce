@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Icon, Message, Popup, Table } from 'semantic-ui-react';
+import { Button, Container, Icon, Message, Popup, Table } from 'semantic-ui-react';
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
 import { listProducts } from '../actions/productActions';
-import { adminProductDelete } from '../actions/adminActions';
+import { adminProductCreate, adminProductDelete } from '../actions/adminActions';
 import { PRODUCT_LIST_RESET } from '../constants/productConstants';
+import { ADMIN_CREATE_PRODUCT_RESET } from '../constants/adminConstants';
 
 const AdminProductListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -17,19 +18,32 @@ const AdminProductListScreen = ({ history }) => {
   const { userInfo } = userLogin;
 
   const adminDeleteProduct = useSelector((state) => state.adminDeleteProduct);
-  const { success } = adminDeleteProduct;
+  const { success: successDelete } = adminDeleteProduct;
+
+  const adminCreateProduct = useSelector((state) => state.adminCreateProduct);
+  const { loading: loadingCreate, error: errorCreate, product: createdProduct, success: successCreate } = adminCreateProduct;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts());
-    } else {
-      dispatch({ type: PRODUCT_LIST_RESET });
+    dispatch({ type: ADMIN_CREATE_PRODUCT_RESET });
+
+    if (!userInfo.isAdmin) {
       history.push('/login');
     }
-  }, [dispatch, history, userInfo, success]);
+
+    if (successCreate) {
+      history.push(`/admin/product/${createdProduct._id}/edit`);
+    } else {
+      dispatch({ type: PRODUCT_LIST_RESET });
+      dispatch(listProducts());
+    }
+  }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct]);
 
   const deleteProductHandler = (e, { value }) => {
     dispatch(adminProductDelete(value));
+  };
+
+  const createProductHandler = () => {
+    dispatch(adminProductCreate());
   };
 
   return (
@@ -37,53 +51,58 @@ const AdminProductListScreen = ({ history }) => {
       {loading && <Loader />}
       {error && <Message error list={error} />}
       {products && (
-        <Table compact celled style={{ maxWidth: '80%', margin: '5rem auto 0' }}>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Price</Table.HeaderCell>
-              <Table.HeaderCell># In Stock</Table.HeaderCell>
-              <Table.HeaderCell>Rating</Table.HeaderCell>
-              <Table.HeaderCell></Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {products &&
-              products.map((product) => (
-                <Table.Row key={product._id}>
-                  <Table.Cell>{product.name}</Table.Cell>
-                  <Table.Cell>{product.price}</Table.Cell>
-                  <Table.Cell>{product.numInStock}</Table.Cell>
-                  <Table.Cell>{product.rating}</Table.Cell>
-                  <Table.Cell collapsing>
-                    <Button animated basic to={`/admin/product/${product._id}`} as={Link}>
-                      <Button.Content hidden>Edit</Button.Content>
-                      <Button.Content visible>
-                        <Icon name='edit outline' />
-                      </Button.Content>
-                    </Button>
-                    <Popup
-                      hideOnScroll
-                      trigger={
-                        <Button animated basic color='red'>
-                          <Button.Content hidden>Delete</Button.Content>
-                          <Button.Content visible>
-                            <Icon.Group>
-                              <Icon name='shopping basket' />
-                              <Icon corner='bottom right' name='x' />
-                            </Icon.Group>
-                          </Button.Content>
-                        </Button>
-                      }
-                      content={<Button color='green' content='Confirm Deletion' onClick={deleteProductHandler} value={product._id} />}
-                      on='click'
-                      position='top right'
-                    />
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-          </Table.Body>
-        </Table>
+        <Container>
+          <Button color='black' style={{ margin: '5rem 0 1rem', float: 'right' }} onClick={createProductHandler}>
+            Create Product
+          </Button>
+          <Table compact celled>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Name</Table.HeaderCell>
+                <Table.HeaderCell>Price</Table.HeaderCell>
+                <Table.HeaderCell># In Stock</Table.HeaderCell>
+                <Table.HeaderCell>Rating</Table.HeaderCell>
+                <Table.HeaderCell></Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {products &&
+                products.map((product) => (
+                  <Table.Row key={product._id}>
+                    <Table.Cell>{product.name}</Table.Cell>
+                    <Table.Cell>{product.price}</Table.Cell>
+                    <Table.Cell>{product.numInStock}</Table.Cell>
+                    <Table.Cell>{product.rating}</Table.Cell>
+                    <Table.Cell collapsing>
+                      <Button animated basic to={`/admin/product/${product._id}`} as={Link}>
+                        <Button.Content hidden>Edit</Button.Content>
+                        <Button.Content visible>
+                          <Icon name='edit outline' />
+                        </Button.Content>
+                      </Button>
+                      <Popup
+                        hideOnScroll
+                        trigger={
+                          <Button animated basic color='red'>
+                            <Button.Content hidden>Delete</Button.Content>
+                            <Button.Content visible>
+                              <Icon.Group>
+                                <Icon name='shopping basket' />
+                                <Icon corner='bottom right' name='x' />
+                              </Icon.Group>
+                            </Button.Content>
+                          </Button>
+                        }
+                        content={<Button color='green' content='Confirm Deletion' onClick={deleteProductHandler} value={product._id} />}
+                        on='click'
+                        position='top right'
+                      />
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+            </Table.Body>
+          </Table>
+        </Container>
       )}
     </div>
   );

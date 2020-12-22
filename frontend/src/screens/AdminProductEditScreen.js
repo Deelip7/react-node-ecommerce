@@ -16,11 +16,9 @@ const AdminProductEditScreen = ({ match, history }) => {
 
   const [name, setName] = useState('');
   const [detail, setDetail] = useState('');
-  // const [image, setImage] = useState('/logo192.png');
   const [image, setImage] = useState('');
   const [price, setPrice] = useState('');
   const [numInStock, setNumInStock] = useState('');
-  const [uploading, setUploading] = useState(false);
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
@@ -36,7 +34,7 @@ const AdminProductEditScreen = ({ match, history }) => {
       dispatch({ type: ADMIN_UPDATE_PRODUCT_RESET });
       history.push('/admin/productlist');
     } else {
-      if (!product.name || product._id !== productId) {
+      if (!product || !product.name || product._id !== productId) {
         dispatch(listProductDetails(productId));
       } else {
         setName(product.name);
@@ -59,7 +57,6 @@ const AdminProductEditScreen = ({ match, history }) => {
       const file = acceptedFiles[0];
       const formData = new FormData();
       formData.append('image', file);
-      setUploading('true');
 
       try {
         const config = {
@@ -69,12 +66,9 @@ const AdminProductEditScreen = ({ match, history }) => {
         };
 
         const { data } = await axios.post(`/api/upload`, formData, config);
-        console.log(data);
         setImage(data);
-        setUploading(false);
       } catch (error) {
         console.log(error);
-        setUploading(false);
       }
     }
   };
@@ -87,7 +81,7 @@ const AdminProductEditScreen = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(adminProductUpdate({ _id: productId, name, price, numInStock, image }));
+    dispatch(adminProductUpdate({ _id: productId, name, price, numInStock, image, detail }));
   };
 
   return (

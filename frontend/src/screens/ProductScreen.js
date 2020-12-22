@@ -18,7 +18,6 @@ const ProductScreen = ({ match, history }) => {
 
   const productReview = useSelector((state) => state.productReview);
   const { success: successProductReview, loading: loadingProductReview, error: errorProductReview } = productReview;
-  // alert(errorProductReview);
 
   const { loading, product, error } = productDetails;
 
@@ -62,10 +61,9 @@ const ProductScreen = ({ match, history }) => {
         <Loader />
       ) : error ? (
         <Page404 />
-      ) : (
+      ) : product ? (
         <div className='product-container'>
           <Meta title={product.name} />
-
           <div className='product'>
             <div className='product__info'>
               <Ratings rating={product.rating} />
@@ -125,7 +123,7 @@ const ProductScreen = ({ match, history }) => {
             </Comment.Group>
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 };

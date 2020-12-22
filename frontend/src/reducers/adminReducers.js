@@ -90,6 +90,31 @@ export const adminDeleteProductReducer = (state = {}, action) => {
   }
 };
 
+export const adminCreateProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case actions.ADMIN_CREATE_PRODUCT_REQUEST:
+      return {
+        loading: true,
+      };
+    case actions.ADMIN_CREATE_PRODUCT_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        product: action.payload,
+      };
+    case actions.ADMIN_CREATE_PRODUCT_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case actions.ADMIN_CREATE_PRODUCT_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
 export const adminUpdateProductReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case actions.ADMIN_UPDATE_PRODUCT_REQUEST:

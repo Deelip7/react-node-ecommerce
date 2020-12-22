@@ -5,7 +5,7 @@ import asyncHandler from 'express-async-handler';
 // @route GET /api/products
 // @acess Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 5;
+  const pageSize = 10;
   const selectedPage = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {
@@ -84,14 +84,14 @@ const deleteProductById = asyncHandler(async (req, res) => {
 });
 
 // @desc Create a product
-// @route Create /api/products/:id
+// @route POST /api/products/:id
 // @acess Private/Admin
 const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
     user: req.user._id,
     name: 'Sample name',
-    image: '/images/Sample.jpg',
-    detail: 'Sample',
+    image: '/Images/Sample.png',
+    detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum ducimus quisquam unde nam eos ut dolorem animi accusamus sed consequatur.',
     price: 0,
     numInStock: 0,
     rating: 0,
