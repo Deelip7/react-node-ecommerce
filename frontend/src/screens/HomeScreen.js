@@ -36,7 +36,7 @@ const HomeScreen = ({ match }) => {
           )}
           <div className='card-container'>
             {products
-              .sort((a, b) => b.numInStock - a.numInStock)
+              .sort((a, b) => b.price - a.price)
               .map((product) => (
                 <Product product={product} key={product._id} />
               ))}

@@ -140,7 +140,7 @@ export const updateOrderToDelivered = (orderId) => async (dispatch, getState) =>
       },
     };
 
-    const { data } = await axios.put(`/api/orders/${orderId}/delivered`, config);
+    const { data } = await axios.put(`/api/orders/${orderId}/delivered`, {}, config);
 
     dispatch({
       type: actions.ORDER_DELIVER_SUCCESS,

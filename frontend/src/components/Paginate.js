@@ -5,7 +5,6 @@ import { Pagination } from 'semantic-ui-react';
 const Paginate = ({ totalPages, selectedPage, isAdmin = false, keyword = '', history, match }) => {
   const pageNumber = match.params.pageNumber;
   const handlePaginationChange = (e, { activePage }) => {
-    // window.scrollTo(0, 0);
     history.push(`/page/${activePage}`);
   };
   return (
