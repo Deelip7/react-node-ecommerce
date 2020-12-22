@@ -12,11 +12,11 @@ import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+
   const { cartItems, shippingAddress, paymentMethod } = useSelector((state) => state.cart);
 
-  if (!paymentMethod) {
-    history.push('/payment');
-  }
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const priceFormat = (price) => {
     return (Math.round(price * 100) / 100).toFixed(2);
@@ -45,13 +45,19 @@ const PlaceOrderScreen = ({ history }) => {
   };
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login');
+    } else if (!paymentMethod) {
+      history.push('/payment');
+    }
+
     if (success) {
       history.push(`/orders/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
       dispatch({ type: CART_RESET });
       localStorage.removeItem('cartItems');
     }
-  }, [success, history, dispatch, order]);
+  }, [success, history, dispatch, order, userInfo, paymentMethod]);
 
   return (
     <>

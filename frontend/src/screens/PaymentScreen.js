@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Radio } from 'semantic-ui-react';
 import FormContainer from '../components/FormContainer';
 import OrderSteps from '../components/OrderSteps';
@@ -9,6 +9,15 @@ const PaymentScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const [paymentMethod, setPaymentMethod] = useState('PayPal');
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push('/login');
+    }
+  }, [history, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();

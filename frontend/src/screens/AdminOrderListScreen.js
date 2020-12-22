@@ -50,13 +50,13 @@ const AdminOrderListScreen = ({ history }) => {
             <Table.Body>
               {orders.length !== 0
                 ? orders.map((order) => (
-                    <Table.Row key={order._id} error={order.isPaid ? false : true} positive={order.isPaid ? true : false} collapsing>
+                    <Table.Row key={order._id} error={order.isDelivered && order.isPaid ? false : true} positive={order.isDelivered && order.isPaid ? true : false}>
                       <Table.Cell>{order._id}</Table.Cell>
                       <Table.Cell>{order.createdAt.split('T')[0]}</Table.Cell>
                       <Table.Cell>${order.orderTotal}</Table.Cell>
                       <Table.Cell>{order.isPaid ? 'Yes' : 'No'}</Table.Cell>
                       <Table.Cell>{order.isDelivered ? 'Yes' : 'No'}</Table.Cell>
-                      <Table.Cell collapsing>
+                      <Table.Cell>
                         <Button animated basic to={`/orders/${order._id}/delivered`} as={Link}>
                           <Button.Content hidden>Details</Button.Content>
                           <Button.Content visible>
@@ -80,7 +80,7 @@ const AdminOrderListScreen = ({ history }) => {
                           />
                         )}
                       </Table.Cell>
-                      <Table.Cell collapsing>{order.isPaid && order.isDelivered ? <Icon name='checkmark' /> : <Icon name='x' />}</Table.Cell>
+                      <Table.Cell>{order.isDelivered && order.isPaid ? <Icon name='checkmark' /> : <Icon name='x' />}</Table.Cell>
                     </Table.Row>
                   ))
                 : null}

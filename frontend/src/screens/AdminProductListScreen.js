@@ -21,15 +21,14 @@ const AdminProductListScreen = ({ history }) => {
   const { success: successDelete } = adminDeleteProduct;
 
   const adminCreateProduct = useSelector((state) => state.adminCreateProduct);
-  const { loading: loadingCreate, error: errorCreate, product: createdProduct, success: successCreate } = adminCreateProduct;
+  const { product: createdProduct, success: successCreate } = adminCreateProduct;
 
   useEffect(() => {
     dispatch({ type: ADMIN_CREATE_PRODUCT_RESET });
 
-    if (!userInfo.isAdmin) {
+    if (!userInfo || !userInfo.isAdmin) {
       history.push('/login');
     }
-
     if (successCreate) {
       history.push(`/admin/product/${createdProduct._id}/edit`);
     } else {

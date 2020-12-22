@@ -27,7 +27,9 @@ const AdminUserEditScreen = ({ match, history }) => {
       dispatch({ type: ADMIN_UPDATE_USER_RESET });
       history.push('/admin/userlist');
     } else {
-      if (!user.name || user._id !== userId) {
+      if (!user) {
+        history.push('/login');
+      } else if (user._id !== userId) {
         dispatch(getUserDetails(userId));
       } else {
         setName(user.name);
