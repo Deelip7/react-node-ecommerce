@@ -37,6 +37,7 @@ const HomeScreen = ({ match }) => {
           <div className='card-container'>
             {products
               .sort((a, b) => b.price - a.price)
+              .filter((r) => r.name !== 'Sample name')
               .map((product) => (
                 <Product product={product} key={product._id} />
               ))}

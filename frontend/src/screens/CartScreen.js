@@ -55,7 +55,7 @@ const CartScreen = ({ match, location, history }) => {
             </div>
             <div className='cart-subtotal'>
               <h4>
-                SubTotal: <span style={{ fontWeight: 'normal', float: 'right' }}></span>
+                SubTotal: <span style={{ fontWeight: 'normal', float: 'right' }}>${subTotal}</span>
               </h4>
               <Button color='black' type='button' onClick={checkoutHandler}>
                 Proceed to checkout

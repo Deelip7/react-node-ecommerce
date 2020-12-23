@@ -40,6 +40,7 @@ const Header = ({ history }) => {
     } else {
       history.push('/');
     }
+    setKeyword('');
   };
 
   return (
