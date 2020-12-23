@@ -26,7 +26,7 @@ const ProfileScreen = ({ history }) => {
     if (!userInfo) {
       history.push('/login');
     } else {
-      if (!user.name) {
+      if (!user || !user.name) {
         dispatch({ type: USER_UPDATE_RESET });
         dispatch(getUserDetails('profile'));
       } else if (orderList) {
@@ -39,15 +39,15 @@ const ProfileScreen = ({ history }) => {
   return (
     <>
       <Meta title='Profile' />
-      {userLoading && <Loader />}
-      {userError && <Message error list={[error]} />}
-
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : userInfo ? (
         <div className='profile-Container'>
+          {userLoading && <Loader />}
+          {userError && <Message error list={[userError]} />}
+          {orderError && <Message error list={[orderError]} />}
           <div className='user'>
             <div className='profile'>
               <h1 className='profile__name'>{userInfo.name}</h1>

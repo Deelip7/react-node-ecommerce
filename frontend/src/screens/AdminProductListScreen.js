@@ -7,12 +7,14 @@ import { listProducts } from '../actions/productActions';
 import { adminProductCreate, adminProductDelete } from '../actions/adminActions';
 import { PRODUCT_LIST_RESET } from '../constants/productConstants';
 import { ADMIN_CREATE_PRODUCT_RESET } from '../constants/adminConstants';
+import Paginate from '../components/Paginate';
 
-const AdminProductListScreen = ({ history }) => {
+const AdminProductListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
+  const pageNumber = match.params.pageNumber || 1;
 
   const productList = useSelector((state) => state.productList);
-  const { loading, products, error } = productList;
+  const { loading, products, error, totalPages, selectedPage } = productList;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -33,7 +35,7 @@ const AdminProductListScreen = ({ history }) => {
       history.push(`/admin/product/${createdProduct._id}/edit`);
     } else {
       dispatch({ type: PRODUCT_LIST_RESET });
-      dispatch(listProducts());
+      dispatch(listProducts('', pageNumber));
     }
   }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct]);
 
@@ -101,6 +103,7 @@ const AdminProductListScreen = ({ history }) => {
                 ))}
             </Table.Body>
           </Table>
+          <Paginate totalPages={totalPages} selectedPage={selectedPage} />
         </Container>
       )}
     </div>

@@ -94,7 +94,6 @@ const OrderScreen = ({ match, history }) => {
         <div>{`Order #: ${order._id}`}</div>
         <div>{`Order placed on: ${order.createdAt}`}</div>
         <h4>Shipping Information</h4>
-        <div>Shipping Address:</div>
         <div>{order.user.name},</div>
         <div>{`${order.shippingAddress.address}, ${order.shippingAddress.city} ${order.shippingAddress.postalCode}, ${order.shippingAddress.country}.`}</div>
         <div>

@@ -26,6 +26,7 @@
     &__info {
       display: flex;
       flex-direction: column;
+      gap: 1rem;
       justify-content: space-around;
 
       .product__name {
@@ -68,6 +69,7 @@
       @media screen and (max-width: 990px) {
         .product__detail {
           max-width: 50vw;
+          padding-right: 1rem;
         }
       }
     }
@@ -118,14 +120,14 @@
     .product {
       flex-direction: column;
 
-      &__info {
+      .product__info {
         order: 2;
       }
-      &__detail {
+      .product__detail {
         max-width: 100%;
       }
 
-      &__form {
+      .product__form {
         flex-direction: column;
 
         .ui.form {
@@ -141,11 +143,12 @@
         }
       }
 
-      &__image img {
+      .product__image img {
         width: 100%;
         max-width: 100%;
         height: auto;
         display: block;
+        margin-bottom: 2rem;
       }
     }
     .review {

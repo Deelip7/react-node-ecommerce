@@ -86,14 +86,27 @@
     padding: 1.5rem;
     .cart {
       .cart-items {
-        gap: 20px;
+        gap: 10px;
+
+        &__name {
+          font-size: 1.1rem;
+          font-weight: 400;
+          width: 75%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        &__price {
+          font-weight: 500;
+          font-size: 1rem;
+        }
+
         &__form {
           gap: 10px;
           width: 100%;
 
           .ui.selection.dropdown {
             border-radius: 0%;
-            min-width: 8.57rem;
+            min-width: 7.57rem;
           }
         }
       }
