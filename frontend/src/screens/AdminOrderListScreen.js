@@ -76,7 +76,7 @@ const AdminOrderListScreen = ({ history }) => {
                             <Popup
                               hideOnScroll
                               trigger={
-                                <Button animated basic color='red'>
+                                <Button animated basic color='red' loading={loadingDeliver}>
                                   <Button.Content hidden>Ship</Button.Content>
                                   <Button.Content visible>
                                     <Icon name='shipping fast' />

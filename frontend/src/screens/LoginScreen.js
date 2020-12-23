@@ -31,14 +31,13 @@ const LoginScreen = ({ history, location }) => {
   return (
     <>
       <Meta title={'Login'} />
-      {loading && <Loader />}
       <FormContainer>
         {error && <Message error list={[error]} />}
         <h1>Log in to your account</h1>
         <Form onSubmit={(e) => loginHandler(e)}>
           <Form.Input size='large' icon='user' iconPosition='left' label='Email Address' type='email' placeholder='Email Address' onChange={(e) => setEmail(e.target.value)} required />
           <Form.Input size='large' icon='lock' iconPosition='left' label='Password' type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
-          <Button color='black' type='submit'>
+          <Button color='black' type='submit' loading={loading}>
             Submit
           </Button>
         </Form>

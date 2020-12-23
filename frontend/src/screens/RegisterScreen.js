@@ -40,7 +40,6 @@ const RegisterScreen = ({ history, location }) => {
     <>
       <Meta title={'Register'} />
 
-      {loading && <Loader />}
       {error && <Message error list={[error]} />}
       <FormContainer>
         {message && <Message error list={[message]} />}
@@ -59,7 +58,7 @@ const RegisterScreen = ({ history, location }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          <Button color='black' type='submit' style={{ width: '100%' }}>
+          <Button color='black' type='submit' style={{ width: '100%' }} loading={loading}>
             Submit
           </Button>
         </Form>
