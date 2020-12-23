@@ -2,7 +2,7 @@ import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Divider, Icon, Message, Table } from 'semantic-ui-react';
+import { Divider, Icon, Message, Table, Loader as InlineLoader } from 'semantic-ui-react';
 import OrderItems from '../components/OrderItems';
 import { getOrderDetails, updateOrderToPaid } from '../actions/orderActions';
 import Page404 from '../components/Page404';
@@ -163,8 +163,8 @@ const OrderScreen = ({ match, history }) => {
         </div>
         {!order.isPaid && (
           <div>
-            {payLoading && <Loader />}
-            {!sdkLoaded ? <Loader /> : <PayPalButton amount={order.orderTotal} onSuccess={successPaymentHandler} />}
+            {payLoading && <InlineLoader active inline='centered' />}
+            {!sdkLoaded ? <InlineLoader active inline='centered' /> : <PayPalButton amount={order.orderTotal} onSuccess={successPaymentHandler} />}
           </div>
         )}
       </div>

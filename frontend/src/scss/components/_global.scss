@@ -8,7 +8,6 @@
   padding: 0;
   box-sizing: border-box;
   outline: 0 !important;
-  // border: 1px solid rgb(255, 156, 156);
 }
 
 body {
@@ -41,7 +40,6 @@ button,
 .ui.form .field > label,
 .ui.divider {
   font-weight: 400 !important;
-  // text-transform: uppercase !important;
   font-size: 1.2rem !important;
 }
 .ui.button {
@@ -70,10 +68,6 @@ button,
   font-weight: 500 !important;
   font-size: 0.9rem;
 }
-// .ui.ordered.steps .step.completed::before,
-// .ui.steps .step.completed > .icon::before {
-//   color: #21ba45 !important;
-// }
 
 .ui.ordered.steps .step::before {
   font-size: 1.5em !important;

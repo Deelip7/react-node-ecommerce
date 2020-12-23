@@ -20,60 +20,70 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 5rem;
-    padding-bottom: 6rem;
+    padding-bottom: 4rem;
     border-bottom: 1px solid #e2e2e3;
 
-    &__price {
-      font-size: 1.5rem;
-      font-weight: 500;
-      line-height: 2em;
-    }
-    &__detail {
-      margin: 1rem 0;
-      font-size: 1.1rem;
-      max-width: 30vw;
-      color: #555555;
-    }
-    &__form {
+    &__info {
       display: flex;
-      justify-content: flex-start;
-      gap: 10px;
+      flex-direction: column;
+      justify-content: space-around;
 
-      .ui.form {
-        width: 9.56rem;
+      .product__name {
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .product__price {
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 2em;
       }
 
-      .ui.selection.dropdown {
-        border-radius: 0%;
-        min-width: 9.57rem;
+      .product__detail {
+        font-size: 1.1rem;
+        max-width: 30vw;
+        color: #555555;
       }
-    }
+      .product__form {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 1rem;
+        gap: 1rem;
+        .ui.form {
+          width: 9.56rem;
+        }
 
-    Button {
-      margin-left: 0rem;
-      height: 2.712rem;
-    }
+        .ui.selection.dropdown {
+          border-radius: 0%;
+          min-width: 9.57rem;
+        }
+      }
+      .product__social > * {
+        margin-right: 1rem;
+      }
 
-    @media screen and (max-width: 990px) {
-      gap: 2rem;
-
-      &__detail {
-        max-width: 50vw;
+      Button {
+        margin-left: 0rem;
+        height: 2.712rem;
+      }
+      @media screen and (max-width: 990px) {
+        .product__detail {
+          max-width: 50vw;
+        }
       }
     }
   }
   .review {
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    margin: 4.5rem 0;
+    margin: 4rem 0;
+    max-width: 600px;
+    width: 100%;
 
     & > div {
       max-width: 100% !important;
     }
     .ui.comments .comment {
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
     }
     .metadata {
       margin-bottom: 0.7rem !important;
@@ -107,7 +117,6 @@
 
     .product {
       flex-direction: column;
-      gap: 4rem;
 
       &__info {
         order: 2;

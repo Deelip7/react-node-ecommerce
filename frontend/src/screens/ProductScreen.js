@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Ratings from '../components/Ratings';
 import { listProductDetails, Productreview } from '../actions/productActions';
-import { Button, Comment, Form, Select, Rating } from 'semantic-ui-react';
+import { Button, Comment, Form, Select, Rating, Message, Icon } from 'semantic-ui-react';
 import Page404 from '../components/Page404';
 import Loader from '../components/Loader';
 import Meta from '../components/Meta';
+import { PRODUCT_DETAILS_RESET } from '../constants/productConstants';
 
 const ProductScreen = ({ match, history }) => {
   const dispatch = useDispatch(0);
@@ -22,6 +23,7 @@ const ProductScreen = ({ match, history }) => {
   const { loading, product, error } = productDetails;
 
   useEffect(() => {
+    dispatch({ type: PRODUCT_DETAILS_RESET });
     if (successProductReview) {
       setRating(0);
       setComment(' ');
@@ -44,7 +46,7 @@ const ProductScreen = ({ match, history }) => {
   const reviewHandler = (e) => {
     e.preventDefault();
     if (!rating) {
-      alert('Please enter a rating');
+      alert('Please enter an overall rating');
     } else {
       dispatch(
         Productreview(match.params.id, {
@@ -66,7 +68,9 @@ const ProductScreen = ({ match, history }) => {
           <Meta title={product.name} />
           <div className='product'>
             <div className='product__info'>
-              <Ratings rating={product.rating} />
+              <div>
+                <Ratings rating={product.rating} />
+              </div>
               <h1 className='product__name'>{product.name}</h1>
               <div className='product__price'>${product.price}</div>
               <div className='product__detail'>
@@ -80,6 +84,12 @@ const ProductScreen = ({ match, history }) => {
                   ADD TO CART
                 </Button>
               </Form>
+              <div className='product__social'>
+                <Icon name='mail outline' size='large' color='black' inverted />
+                <Icon name='twitter' size='large' color='black' inverted />
+                <Icon name='pinterest' size='large' color='black' inverted />
+                <Icon name='facebook' size='large' color='black' inverted />
+              </div>
             </div>
             <div className='product__image'>
               <img src={product.image} alt={product.name} />
@@ -112,11 +122,12 @@ const ProductScreen = ({ match, history }) => {
               )}
 
               <h3>Review this product</h3>
+              {errorProductReview && <Message>Sorry. You have already reviewed this product</Message>}
               <span className='review__span'>Share your thoughts with other customers</span>
               <Form reply>
                 <Form.TextArea onChange={(e) => setComment(e.target.value)} />
                 <div className='review-rating'>
-                  <Rating maxRating={5} onRate={ratingHandler} size='huge' required clearable />
+                  <p>Overall Rating</p> <Rating maxRating={5} onRate={ratingHandler} size='huge' required clearable />
                 </div>
                 <Button content='Write a review' basic type='button' onClick={(e) => reviewHandler(e)} />
               </Form>

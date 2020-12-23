@@ -31,10 +31,10 @@ const Footer = () => {
           </Grid.Column>
           <Grid.Column mobile={16} tablet={4} computer={4}>
             <h4>FOLLOW US</h4>
-            <Icon name='twitter' size='large' color='grey' />
-            <Icon name='github' size='large' color='grey' />
-            <Icon name='instagram' size='large' color='grey' />
-            <Icon name='facebook' size='large' color='grey' />
+            <Icon name='twitter' size='large' color='black' inverted />
+            <Icon name='github' size='large' color='black' inverted />
+            <Icon name='instagram' size='large' color='black' inverted />
+            <Icon name='facebook' size='large' color='black' inverted />
           </Grid.Column>
         </Grid>
       </Container>

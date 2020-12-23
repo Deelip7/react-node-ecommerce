@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as actions from '../constants/adminConstants';
 import { USER_DETAILS_SUCCESS, USER_DETAILS_RESET } from '../constants/userConstants';
 import { PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_RESET } from '../constants/productConstants';
-// import {} from '../constants/orderConstants'
 
 export const adminUsersList = () => async (dispatch, getState) => {
   try {
@@ -52,11 +51,18 @@ export const adminUserUpdate = (user) => async (dispatch, getState) => {
 
     const { data } = await axios.put(`/api/users/${user._id}`, user, config);
 
-    dispatch({ type: actions.ADMIN_UPDATE_USER_SUCCESS });
+    dispatch({
+      type: actions.ADMIN_UPDATE_USER_SUCCESS,
+    });
 
-    dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+    dispatch({
+      type: USER_DETAILS_SUCCESS,
+      payload: data,
+    });
 
-    dispatch({ type: USER_DETAILS_RESET });
+    dispatch({
+      type: USER_DETAILS_RESET,
+    });
   } catch (error) {
     dispatch({
       type: actions.ADMIN_UPDATE_USER_FAIL,
@@ -112,11 +118,18 @@ export const adminProductUpdate = (product) => async (dispatch, getState) => {
 
     const { data } = await axios.put(`/api/products/${product._id}`, product, config);
 
-    dispatch({ type: actions.ADMIN_UPDATE_PRODUCT_SUCCESS });
+    dispatch({
+      type: actions.ADMIN_UPDATE_PRODUCT_SUCCESS,
+    });
 
-    dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+    dispatch({
+      type: PRODUCT_DETAILS_SUCCESS,
+      payload: data,
+    });
 
-    dispatch({ type: PRODUCT_DETAILS_RESET });
+    dispatch({
+      type: PRODUCT_DETAILS_RESET,
+    });
   } catch (error) {
     dispatch({
       type: actions.ADMIN_UPDATE_PRODUCT_FAIL,
@@ -205,6 +218,36 @@ export const adminOrdersList = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: actions.ADMIN_LIST_ORDERS_FAIL,
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+    });
+  }
+};
+
+export const updateOrderToDelivered = (orderId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: actions.ADMIN_UPDATE_ORDER_TO_DELIVERED_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.put(`/api/orders/${orderId}/delivered`, {}, config);
+
+    dispatch({
+      type: actions.ADMIN_UPDATE_ORDER_TO_DELIVERED_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: actions.ADMIN_UPDATE_ORDER_TO_DELIVERED_FAIL,
       payload: error.response && error.response.data.message ? error.response.data.message : error.message,
     });
   }

@@ -161,7 +161,7 @@ export const adminListOrdersReducer = (state = { orders: [] }, action) => {
   }
 };
 
-export const adminDeliveredOrderReducer = (state = { order: [] }, action) => {
+export const adminDeliveredOrderReducer = (state = {}, action) => {
   switch (action.type) {
     case actions.ADMIN_UPDATE_ORDER_TO_DELIVERED_REQUEST:
       return {
@@ -170,7 +170,7 @@ export const adminDeliveredOrderReducer = (state = { order: [] }, action) => {
     case actions.ADMIN_UPDATE_ORDER_TO_DELIVERED_SUCCESS:
       return {
         loading: false,
-        order: action.payload,
+        success: true,
       };
     case actions.ADMIN_UPDATE_ORDER_TO_DELIVERED_FAIL:
       return {

@@ -41,8 +41,9 @@ const productDetailsReducer = (state = { product: { review: [] } }, action) => {
         loading: false,
         error: action.payload,
       };
-    case actions.PRODUCT_LIST_RESET:
+    case actions.PRODUCT_DETAILS_RESET:
       return {};
+
     default:
       return state;
   }

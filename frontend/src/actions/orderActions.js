@@ -122,34 +122,3 @@ export const updateOrderToPaid = (orderId, paymentResult) => async (dispatch, ge
     });
   }
 };
-
-export const updateOrderToDelivered = (orderId) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: actions.ORDER_DELIVER_REQUEST,
-    });
-
-    const {
-      userLogin: { userInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    const { data } = await axios.put(`/api/orders/${orderId}/delivered`, {}, config);
-
-    dispatch({
-      type: actions.ORDER_DELIVER_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: actions.ORDER_DELIVER_FAIL,
-      payload: error.response && error.response.data.message ? error.response.data.message : error.message,
-    });
-  }
-};
