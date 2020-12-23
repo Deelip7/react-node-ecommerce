@@ -11,9 +11,8 @@
     justify-content: center;
     align-items: center;
 
-    &__logo img {
+    &__logo {
       margin-right: 2rem;
-      height: 4rem;
     }
     .ui.input > input {
       background-color: #e7e7e787 !important;
@@ -42,9 +41,7 @@
 
     &__cart {
       cursor: pointer;
-      img {
-        width: 2.19rem;
-      }
+
       .ui.menu .item > .label {
         border-radius: 50rem !important;
       }
@@ -54,9 +51,9 @@
       margin-left: 1rem;
       font-size: 1.2rem;
       cursor: pointer;
-      img {
+      svg {
         position: relative;
-        top: 4px;
+        top: 5px;
         margin: 0 auto;
       }
       .ui.dropdown .menu .active.item,
