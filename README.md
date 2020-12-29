@@ -1,8 +1,6 @@
 # 🛍️ MERN E-commerce Store 
 An ecommerce store built with MERN stack and Paypal payments API.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bb5b098c-c2c1-4c78-8328-2dadb6a520c3/deploy-status)](https://app.netlify.com/sites/theelipan/deploys)
-
 ![Homepage screenshot](https://www.theelipan.com/images/rn-mockup.svg)
 
 ## Features
@@ -24,6 +22,7 @@ An ecommerce store built with MERN stack and Paypal payments API.
 - [Node](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 - [Mongoose](https://mongoosejs.com/)
+- [Heroku](https://devcenter.heroku.com/)
 
 
 ## Installation
