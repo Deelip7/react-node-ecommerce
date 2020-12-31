@@ -3,8 +3,9 @@ An ecommerce store built with MERN stack and Paypal payments API.
 
 ![Homepage screenshot](https://www.theelipan.com/images/rn-mockup.svg)
 
-
-<img src="https://user-images.githubusercontent.com/38120176/103391981-c2256c80-4ae9-11eb-8c45-9ae4311139e7.png" alt="cart screenshot" width='450px'/><img src="https://user-images.githubusercontent.com/38120176/103392035-f26d0b00-4ae9-11eb-8021-a94ca0771a55.png" alt="admin panel screenshot" width='450px'/>
+<img src="https://user-images.githubusercontent.com/38120176/103392271-06fdd300-4aeb-11eb-8924-4f32aaafc1dc.png" alt="order screen screenshot" />
+<img src="https://user-images.githubusercontent.com/38120176/103391981-c2256c80-4ae9-11eb-8c45-9ae4311139e7.png" alt="cart screenshot"/>
+<img src="https://user-images.githubusercontent.com/38120176/103392035-f26d0b00-4ae9-11eb-8021-a94ca0771a55.png" alt="admin panel screenshot" />
 
 ## Features
 * Login/register 
