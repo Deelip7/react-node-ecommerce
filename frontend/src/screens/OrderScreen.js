@@ -162,6 +162,14 @@ const OrderScreen = ({ match, history }) => {
         </div>
         {!order.isPaid && (
           <div>
+            <Message style={{ background: 'none' }}>
+              <p>
+                User Email: <input style={inputStyle} defaultValue='john@m.com' />
+              </p>
+              <p>
+                Password: <input style={inputStyle} defaultValue='12345678' />
+              </p>
+            </Message>
             {payLoading && <InlineLoader active inline='centered' />}
             {!sdkLoaded ? <InlineLoader active inline='centered' /> : <PayPalButton amount={order.orderTotal} onSuccess={successPaymentHandler} />}
           </div>
@@ -174,5 +182,11 @@ const OrderScreen = ({ match, history }) => {
 const style = {
   padding: '10px',
   marginTop: '7px',
+};
+const inputStyle = {
+  fontFamily: 'inherit',
+  fontWeight: '200',
+  border: 'none',
+  background: 'none',
 };
 export default OrderScreen;
