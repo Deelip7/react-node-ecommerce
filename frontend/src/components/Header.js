@@ -21,7 +21,7 @@ const Header = ({ history }) => {
   const trigger = (
     <>
       <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='#656565' className='ui avatar image'>
-        <path stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
+        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
       </svg>
     </>
   );
@@ -50,7 +50,7 @@ const Header = ({ history }) => {
       <div className='nav'>
         <div className='nav__logo'>
           <Link to='/'>
-            <svg width='68' height='68' viewBox='0 0 68 68' fill='none' xmlns='http://www.w3.org/2000/svg' width='4rem'>
+            <svg height='68' viewBox='0 0 68 68' fill='none' xmlns='http://www.w3.org/2000/svg' width='4em'>
               <path
                 d='M10.6065 43.487C10.3136 43.7799 10.3136 44.2548 10.6065 44.5477L14.3188 48.26C14.6117 48.5529 15.0866 48.5529 15.3795 48.26L29.1681 34.4714C29.461 34.1785 29.461 33.7036 29.1681 33.4107L19.6221 23.8648C19.3292 23.5719 18.8544 23.5719 18.5615 23.8648L14.8492 27.5771C14.5563 27.87 14.5563 28.3449 14.8492 28.6378L19.6221 33.4107C19.915 33.7036 19.915 34.1785 19.6221 34.4714L10.6065 43.487Z'
                 fill='#656565'
@@ -81,8 +81,8 @@ const Header = ({ history }) => {
           <Menu compact>
             <Menu.Item>
               <Link to='/cart'>
-                <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='#656565' width='2.19rem'>
-                  <path stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z' />
+                <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='#656565' width='2.19em'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='1' d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z' />
                 </svg>
               </Link>
               {cartItemsNum !== '0' ? (

@@ -9,7 +9,7 @@ const Paginate = ({ totalPages, selectedPage, isAdmin = false, keyword = '', his
   };
   return (
     totalPages > 1 && (
-      <Pagination activePage={pageNumber} style={{ margin: '0 auto' }} totalPages={totalPages} onPageChange={handlePaginationChange} firstItem={null} lastItem={null} pointing secondary />
+      <Pagination activePage={pageNumber} style={{ margin: '0 auto' }} totalPages={totalPages - 1} onPageChange={handlePaginationChange} firstItem={null} lastItem={null} pointing secondary />
     )
   );
 };

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Divider, Form, Message } from 'semantic-ui-react';
+import { Button, Divider, Form } from 'semantic-ui-react';
 import { register } from '../actions/userActions';
 import FormContainer from '../components/FormContainer';
-import Loader from '../components/Loader';
 import Meta from '../components/Meta';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterScreen = ({ history, location }) => {
   const dispatch = useDispatch();
@@ -14,7 +16,7 @@ const RegisterScreen = ({ history, location }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState('');
 
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, userInfo, error } = userRegister;
@@ -25,7 +27,10 @@ const RegisterScreen = ({ history, location }) => {
     if (userInfo) {
       history.push(redirect);
     }
-  }, [userInfo, history, redirect]);
+    if (error) {
+      notify(error);
+    }
+  }, [userInfo, history, redirect, error, message]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -33,16 +38,27 @@ const RegisterScreen = ({ history, location }) => {
       dispatch(register(name, email, password));
     } else {
       setMessage('Password does not match');
+      notify(message);
     }
+  };
+
+  const notify = (msg) => {
+    toast.error(`❕ ${msg}`, {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
     <>
       <Meta title={'Register'} />
-
-      {error && <Message error list={[error]} />}
+      <ToastContainer />
       <FormContainer>
-        {message && <Message error list={[message]} />}
         <h1>Create your account</h1>
         <Form onSubmit={(e) => submitHandler(e)}>
           <Form.Input size='large' icon='user' iconPosition='left' label='Name' placeholder='Name' onChange={(e) => setName(e.target.value)} required />
