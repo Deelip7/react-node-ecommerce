@@ -16,7 +16,6 @@ const RegisterScreen = ({ history, location }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
-  const [message, setMessage] = useState('');
 
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, userInfo, error } = userRegister;
@@ -30,15 +29,14 @@ const RegisterScreen = ({ history, location }) => {
     if (error) {
       notify(error);
     }
-  }, [userInfo, history, redirect, error, message]);
+  }, [userInfo, history, redirect, error]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
       dispatch(register(name, email, password));
     } else {
-      setMessage('Password does not match');
-      notify(message);
+      notify('Password does not match');
     }
   };
 
